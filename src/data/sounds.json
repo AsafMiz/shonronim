@@ -1,83 +1,11 @@
 
 [
   {
-    "id": "sound001",
-    "title": "צליל מצחיק",
-    "filename": "sound001.mp3",
-    "tags": ["מצחיק", "קלאסי"],
-    "hidden_tags": ["כיף", "גרוב"],
-    "category": "מימים"
-  },
-  {
-    "id": "sound002",
-    "title": "אפקט קול",
-    "filename": "sound002.mp3",
-    "tags": ["אפקט", "דרמטי"],
-    "hidden_tags": ["מגניב", "חזק"],
-    "category": "אפקטים"
-  },
-  {
-    "id": "sound003",
-    "title": "מוזיקת רקע",
-    "filename": "sound003.mp3",
-    "tags": ["מוזיקה", "רקע"],
-    "hidden_tags": ["נעים", "רגוע"],
-    "category": "מוזיקה"
-  },
-  {
-    "id": "sound004",
-    "title": "צחוק",
-    "filename": "sound004.mp3",
-    "tags": ["צחוק", "שמחה"],
-    "hidden_tags": ["הומור", "עליז"],
-    "category": "רגשות"
-  },
-  {
-    "id": "sound005",
-    "title": "תופים",
-    "filename": "sound005.mp3",
-    "tags": ["תופים", "קצב"],
-    "hidden_tags": ["חזק", "מקצב"],
-    "category": "כלי נגינה"
-  },
-  {
-    "id": "sound006",
-    "title": "זמזום",
-    "filename": "sound006.mp3",
-    "tags": ["זמזום", "אווירה"],
-    "hidden_tags": ["מסתורי", "עמוק"],
-    "category": "אפקטים"
-  },
-  {
-    "id": "sound007",
-    "title": "פעמון",
-    "filename": "sound007.mp3",
-    "tags": ["פעמון", "התראה"],
-    "hidden_tags": ["חד", "ברור"],
-    "category": "התראות"
-  },
-  {
-    "id": "sound008",
-    "title": "רוח",
-    "filename": "sound008.mp3",
-    "tags": ["רוח", "טבע"],
-    "hidden_tags": ["נעים", "טבעי"],
-    "category": "טבע"
-  },
-  {
-    "id": "sound009",
-    "title": "מחיאות כפיים",
-    "filename": "sound009.mp3",
-    "tags": ["מחיאות", "הערכה"],
-    "hidden_tags": ["חגיגי", "הצלחה"],
-    "category": "רגשות"
-  },
-  {
-    "id": "sound010",
-    "title": "ביפ",
-    "filename": "sound010.mp3",
-    "tags": ["ביפ", "אלקטרוני"],
-    "hidden_tags": ["טכנולוגי", "חד"],
-    "category": "אלקטרוני"
+    "id": "1",
+    "title": "מי אומר לי שלום",
+    "filename": "1.mp3",
+    "tags": ["שלום", "שפטל"],
+    "hidden_tags": ["הלו", "יפה"],
+    "category": "יורם שפטל"
   }
 ]
