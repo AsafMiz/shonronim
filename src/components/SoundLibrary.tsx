@@ -20,7 +20,7 @@ interface SoundLibraryProps {
 }
 
 const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
-  
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
@@ -31,13 +31,13 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const categories = [...new Set(sounds.map(sound => sound.category))];
 
   const filteredSounds = sounds.filter(sound => {
-    const matchesSearch = searchTerm === '' || 
+    const matchesSearch = searchTerm === '' ||
       sound.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       sound.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
       sound.hidden_tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+
     const matchesCategory = selectedCategory === '' || sound.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -48,23 +48,23 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
   const handlePlay = (soundId: string, filename: string) => {
     console.log('handlePlay called', { soundId, filename, globalVolume });
-    
+
     try {
       if (playingSound === soundId) {
         console.log('Stopping currently playing sound');
         setPlayingSound(null);
       } else {
         setPlayingSound(soundId);
-        
+
         // Create and play audio with proper path and volume
-        const soundsDirPath = "src/assets/";
+        const soundsDirPath = "sounds/";
         const audioPath = soundsDirPath + filename;
         console.log('Creating audio with path:', audioPath);
         const audio = new Audio(audioPath);
-        
+
         // Set volume based on global volume
         audio.volume = globalVolume / 100;
-        
+
         audio.play()
           .then(() => {
             console.log('Audio started playing successfully');
@@ -73,7 +73,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
             console.error('Error playing audio:', error);
             setPlayingSound(null);
           });
-        
+
         audio.onended = () => {
           console.log('Audio playback ended');
           setPlayingSound(null);
@@ -83,7 +83,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
           console.error('Audio error:', error);
           setPlayingSound(null);
         };
-        
+
         // Demo: stop playing after 3 seconds
         setTimeout(() => {
           console.log('Stopping audio after 3 seconds (demo)');
@@ -128,7 +128,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     <div className="p-4 max-w-4xl mx-auto" dir="rtl">
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4 text-right">ספריית צלילים</h2>
-        
+
         {/* Search */}
         <div className="mb-4">
           <Input
@@ -167,7 +167,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredSounds.map(sound => {
           const isOnSoundboard = isSoundOnSoundboard(sound.id);
-          
+
           return (
             <div
               key={sound.id}
@@ -184,8 +184,8 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
                     className="w-8 h-8 p-0"
                     onClick={() => handlePlay(sound.id, sound.filename)}
                   >
-                    <Play 
-                      className={`w-4 h-4 ${playingSound === sound.id ? 'animate-pulse' : ''}`} 
+                    <Play
+                      className={`w-4 h-4 ${playingSound === sound.id ? 'animate-pulse' : ''}`}
                       fill={playingSound === sound.id ? 'currentColor' : 'none'}
                     />
                   </Button>
