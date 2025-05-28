@@ -36,7 +36,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound,
 
     // Create audio element for demo purposes (in real app, you'd load actual files)
     audioRef.current = new Audio();
-    audioRef.current.src = `data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmUc`;
+    audioRef.current.src = sound.filename;
     
     setIsPlaying(true);
     audioRef.current.play().catch(console.error);
