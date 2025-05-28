@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
@@ -15,59 +14,90 @@ interface Sound {
 }
 
 const Soundboard: React.FC = () => {
+  console.log('Soundboard rendered');
+  
   const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
 
   const sounds: Sound[] = soundsData;
+  console.log('Soundboard sounds loaded:', sounds);
 
   // Initialize with random sounds on first visit
   useEffect(() => {
+    console.log('useEffect: checking first visit');
     const isFirstVisit = soundboardSounds.every(sound => sound === null);
+    console.log('Is first visit:', isFirstVisit);
+    
     if (isFirstVisit) {
-      const shuffledSounds = [...sounds].sort(() => Math.random() - 0.5);
-      const initialSounds = new Array(8).fill(null);
-      
-      // Fill first 4 positions with random sounds
-      for (let i = 0; i < 4 && i < shuffledSounds.length; i++) {
-        initialSounds[i] = shuffledSounds[i];
+      try {
+        const shuffledSounds = [...sounds].sort(() => Math.random() - 0.5);
+        const initialSounds = new Array(8).fill(null);
+        
+        // Fill first 4 positions with random sounds
+        for (let i = 0; i < 4 && i < shuffledSounds.length; i++) {
+          initialSounds[i] = shuffledSounds[i];
+        }
+        
+        console.log('Setting initial sounds:', initialSounds);
+        setSoundboardSounds(initialSounds);
+      } catch (error) {
+        console.error('Exception in useEffect initialization:', error);
       }
-      
-      setSoundboardSounds(initialSounds);
     }
   }, [sounds, soundboardSounds, setSoundboardSounds]);
 
   const handleAddSound = (cubeIndex: number) => {
-    setTargetCubeIndex(cubeIndex);
-    setShowLibrary(true);
+    console.log('handleAddSound called', { cubeIndex });
+    try {
+      setTargetCubeIndex(cubeIndex);
+      setShowLibrary(true);
+    } catch (error) {
+      console.error('Exception in handleAddSound:', error);
+    }
   };
 
   const handleRemoveSound = (cubeIndex: number) => {
-    const newSounds = [...soundboardSounds];
-    newSounds[cubeIndex] = null;
-    setSoundboardSounds(newSounds);
+    console.log('handleRemoveSound called', { cubeIndex });
+    try {
+      const newSounds = [...soundboardSounds];
+      newSounds[cubeIndex] = null;
+      setSoundboardSounds(newSounds);
+    } catch (error) {
+      console.error('Exception in handleRemoveSound:', error);
+    }
   };
 
   const handleAddToSoundboard = (sound: Sound): boolean => {
-    if (targetCubeIndex !== null) {
-      const newSounds = [...soundboardSounds];
-      newSounds[targetCubeIndex] = sound;
-      setSoundboardSounds(newSounds);
-      setShowLibrary(false);
-      setTargetCubeIndex(null);
-      return true;
-    }
+    console.log('handleAddToSoundboard called', { sound, targetCubeIndex });
+    
+    try {
+      if (targetCubeIndex !== null) {
+        const newSounds = [...soundboardSounds];
+        newSounds[targetCubeIndex] = sound;
+        setSoundboardSounds(newSounds);
+        setShowLibrary(false);
+        setTargetCubeIndex(null);
+        console.log('Added sound to specific cube:', targetCubeIndex);
+        return true;
+      }
 
-    // Find first empty cube
-    const emptyIndex = soundboardSounds.findIndex(s => s === null);
-    if (emptyIndex !== -1) {
-      const newSounds = [...soundboardSounds];
-      newSounds[emptyIndex] = sound;
-      setSoundboardSounds(newSounds);
-      return true;
-    }
+      // Find first empty cube
+      const emptyIndex = soundboardSounds.findIndex(s => s === null);
+      if (emptyIndex !== -1) {
+        const newSounds = [...soundboardSounds];
+        newSounds[emptyIndex] = sound;
+        setSoundboardSounds(newSounds);
+        console.log('Added sound to first empty cube:', emptyIndex);
+        return true;
+      }
 
-    return false; // No empty cubes
+      console.log('No empty cubes available');
+      return false; // No empty cubes
+    } catch (error) {
+      console.error('Exception in handleAddToSoundboard:', error);
+      return false;
+    }
   };
 
   if (showLibrary) {

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,6 +20,8 @@ interface SoundLibraryProps {
 }
 
 const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
+  console.log('SoundLibrary rendered');
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
@@ -28,6 +29,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
   const sounds: Sound[] = soundsData;
   const categories = [...new Set(sounds.map(sound => sound.category))];
+
+  console.log('Loaded sounds:', sounds);
+  console.log('Categories:', categories);
 
   const filteredSounds = sounds.filter(sound => {
     const matchesSearch = searchTerm === '' || 
@@ -40,42 +44,85 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     return matchesSearch && matchesCategory;
   });
 
+  console.log('Filtered sounds:', filteredSounds);
+
   const isSoundOnSoundboard = (soundId: string): boolean => {
-    return soundboardSounds.some(boardSound => boardSound?.id === soundId);
+    const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
+    console.log('isSoundOnSoundboard', { soundId, result });
+    return result;
   };
 
   const handlePlay = (soundId: string, filename: string) => {
-    if (playingSound === soundId) {
+    console.log('handlePlay called', { soundId, filename });
+    
+    try {
+      if (playingSound === soundId) {
+        console.log('Stopping currently playing sound');
+        setPlayingSound(null);
+      } else {
+        setPlayingSound(soundId);
+        
+        // Create and play audio with proper path
+        const audioPath = filename.startsWith('/') ? filename : `/${filename}`;
+        console.log('Creating audio with path:', audioPath);
+        const audio = new Audio(audioPath);
+        
+        audio.play()
+          .then(() => {
+            console.log('Audio started playing successfully');
+          })
+          .catch((error) => {
+            console.error('Error playing audio:', error);
+            setPlayingSound(null);
+          });
+        
+        audio.onended = () => {
+          console.log('Audio playback ended');
+          setPlayingSound(null);
+        };
+
+        audio.onerror = (error) => {
+          console.error('Audio error:', error);
+          setPlayingSound(null);
+        };
+        
+        // Demo: stop playing after 2 seconds
+        setTimeout(() => {
+          console.log('Stopping audio after 2 seconds (demo)');
+          setPlayingSound(null);
+          audio.pause();
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Exception in handlePlay:', error);
       setPlayingSound(null);
-    } else {
-      setPlayingSound(soundId);
-      
-      // Create and play audio
-      const audio = new Audio(filename);
-      audio.play().catch(console.error);
-      
-      audio.onended = () => {
-        setPlayingSound(null);
-      };
-      
-      // Demo: stop playing after 2 seconds
-      setTimeout(() => {
-        setPlayingSound(null);
-        audio.pause();
-      }, 2000);
     }
   };
 
   const handleShare = (sound: Sound) => {
-    const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
-    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    console.log('handleShare called', { sound });
+    try {
+      const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      console.log('Opening WhatsApp with URL:', url);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Exception in handleShare:', error);
+    }
   };
 
   const handleAddToSoundboard = (sound: Sound) => {
-    const success = onAddToSoundboard(sound);
-    if (!success) {
-      alert('אין קוביות פנויות בלוח הצלילים');
+    console.log('handleAddToSoundboard called', { sound });
+    try {
+      const success = onAddToSoundboard(sound);
+      if (!success) {
+        console.log('No empty cubes available');
+        alert('אין קוביות פנויות בלוח הצלילים');
+      } else {
+        console.log('Successfully added sound to soundboard');
+      }
+    } catch (error) {
+      console.error('Exception in handleAddToSoundboard:', error);
     }
   };
 

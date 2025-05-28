@@ -21,51 +21,109 @@ interface SoundCubeProps {
 }
 
 const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound, index }) => {
+  console.log('SoundCube rendered', { sound, index });
+  
   const [isPlaying, setIsPlaying] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlay = () => {
-    if (!sound) return;
-
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    console.log('handlePlay called', { sound });
+    if (!sound) {
+      console.log('No sound available');
+      return;
     }
 
-    // Create audio element and use the correct path
-    audioRef.current = new Audio(sound.filename);
-    
-    setIsPlaying(true);
-    audioRef.current.play().catch(console.error);
-
-    audioRef.current.onended = () => {
-      setIsPlaying(false);
-    };
-
-    // Demo: stop playing after 2 seconds
-    setTimeout(() => {
-      setIsPlaying(false);
+    try {
       if (audioRef.current) {
+        console.log('Stopping previous audio');
         audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
-    }, 2000);
+
+      // Create audio element with proper path
+      const audioPath = sound.filename.startsWith('/') ? sound.filename : `/${sound.filename}`;
+      console.log('Creating audio with path:', audioPath);
+      audioRef.current = new Audio(audioPath);
+      
+      setIsPlaying(true);
+      
+      audioRef.current.play()
+        .then(() => {
+          console.log('Audio started playing successfully');
+        })
+        .catch((error) => {
+          console.error('Error playing audio:', error);
+          setIsPlaying(false);
+        });
+
+      audioRef.current.onended = () => {
+        console.log('Audio playback ended');
+        setIsPlaying(false);
+      };
+
+      audioRef.current.onerror = (error) => {
+        console.error('Audio error:', error);
+        setIsPlaying(false);
+      };
+
+      // Demo: stop playing after 2 seconds
+      setTimeout(() => {
+        console.log('Stopping audio after 2 seconds (demo)');
+        setIsPlaying(false);
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
+      }, 2000);
+    } catch (error) {
+      console.error('Exception in handlePlay:', error);
+      setIsPlaying(false);
+    }
   };
 
   const handleShare = () => {
-    if (!sound) return;
-    const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
-    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    console.log('handleShare called', { sound });
+    if (!sound) {
+      console.log('No sound to share');
+      return;
+    }
+    
+    try {
+      const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      console.log('Opening WhatsApp with URL:', url);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Exception in handleShare:', error);
+    }
   };
 
   const handleRemove = () => {
-    setShowConfirm(true);
+    console.log('handleRemove called');
+    try {
+      setShowConfirm(true);
+    } catch (error) {
+      console.error('Exception in handleRemove:', error);
+    }
   };
 
   const confirmRemove = () => {
-    onRemoveSound();
-    setShowConfirm(false);
+    console.log('confirmRemove called');
+    try {
+      onRemoveSound();
+      setShowConfirm(false);
+    } catch (error) {
+      console.error('Exception in confirmRemove:', error);
+    }
+  };
+
+  const handleAddSound = () => {
+    console.log('handleAddSound called');
+    try {
+      onAddSound();
+    } catch (error) {
+      console.error('Exception in handleAddSound:', error);
+    }
   };
 
   return (
@@ -81,7 +139,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound,
         {/* Main content area */}
         <div 
           className="w-full h-full flex items-center justify-center cursor-pointer"
-          onClick={sound ? handlePlay : onAddSound}
+          onClick={sound ? handlePlay : handleAddSound}
         >
           {sound ? (
             <div className="text-center text-white">
