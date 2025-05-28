@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,66 +19,88 @@ interface SoundCubeProps {
   onAddSound: () => void;
   onRemoveSound: () => void;
   index: number;
+  cubeColor: string;
+  globalVolume: number;
 }
 
-const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound, index }) => {
-  console.log('SoundCube rendered', { sound, index });
+const SoundCube: React.FC<SoundCubeProps> = ({ 
+  sound, 
+  onAddSound, 
+  onRemoveSound, 
+  index, 
+  cubeColor, 
+  globalVolume 
+}) => {
+  console.log('SoundCube rendered', { sound, index, cubeColor, globalVolume });
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlay = () => {
-    console.log('handlePlay called', { sound });
+    console.log('handlePlay called', { sound, globalVolume });
     if (!sound) {
       console.log('No sound available');
       return;
     }
 
     try {
+      // If currently playing, restart the sound
       if (audioRef.current) {
-        console.log('Stopping previous audio');
+        console.log('Stopping and restarting audio');
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
+        audioRef.current = null;
+        setIsPlaying(false);
       }
 
-      // Create audio element with proper path
-      const audioPath = sound.filename.startsWith('/') ? sound.filename : `/${sound.filename}`;
+      // Create new audio element
+      const audioPath = sound.filename;
       console.log('Creating audio with path:', audioPath);
-      audioRef.current = new Audio(audioPath);
+      const audio = new Audio(audioPath);
+      audioRef.current = audio;
+      
+      // Set volume based on global volume
+      audio.volume = globalVolume / 100;
+      console.log('Setting audio volume to:', audio.volume);
       
       setIsPlaying(true);
       
-      audioRef.current.play()
+      audio.play()
         .then(() => {
           console.log('Audio started playing successfully');
         })
         .catch((error) => {
           console.error('Error playing audio:', error);
           setIsPlaying(false);
+          audioRef.current = null;
         });
 
-      audioRef.current.onended = () => {
+      audio.onended = () => {
         console.log('Audio playback ended');
         setIsPlaying(false);
+        audioRef.current = null;
       };
 
-      audioRef.current.onerror = (error) => {
+      audio.onerror = (error) => {
         console.error('Audio error:', error);
         setIsPlaying(false);
+        audioRef.current = null;
       };
 
-      // Demo: stop playing after 2 seconds
+      // For demo purposes - remove this setTimeout in production
       setTimeout(() => {
-        console.log('Stopping audio after 2 seconds (demo)');
-        setIsPlaying(false);
-        if (audioRef.current) {
-          audioRef.current.pause();
+        if (audioRef.current === audio) {
+          console.log('Stopping audio after 3 seconds (demo)');
+          setIsPlaying(false);
+          audio.pause();
+          audioRef.current = null;
         }
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error('Exception in handlePlay:', error);
       setIsPlaying(false);
+      audioRef.current = null;
     }
   };
 
@@ -110,6 +133,12 @@ const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound,
   const confirmRemove = () => {
     console.log('confirmRemove called');
     try {
+      // Stop audio if playing
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+        setIsPlaying(false);
+      }
       onRemoveSound();
       setShowConfirm(false);
     } catch (error) {
@@ -132,7 +161,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound,
         relative w-full aspect-square rounded-xl overflow-hidden
         transition-all duration-300 transform hover:scale-105
         ${sound 
-          ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg hover:shadow-xl' 
+          ? `bg-gradient-to-br ${cubeColor} shadow-lg hover:shadow-xl` 
           : 'bg-gradient-to-br from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 border-2 border-dashed border-gray-400'
         }
       `}>

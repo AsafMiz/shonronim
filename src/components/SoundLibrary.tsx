@@ -26,12 +26,14 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
   const [soundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
+  const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
 
   const sounds: Sound[] = soundsData;
   const categories = [...new Set(sounds.map(sound => sound.category))];
 
   console.log('Loaded sounds:', sounds);
   console.log('Categories:', categories);
+  console.log('Global volume in library:', globalVolume);
 
   const filteredSounds = sounds.filter(sound => {
     const matchesSearch = searchTerm === '' || 
@@ -44,8 +46,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     return matchesSearch && matchesCategory;
   });
 
-  console.log('Filtered sounds:', filteredSounds);
-
   const isSoundOnSoundboard = (soundId: string): boolean => {
     const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
     console.log('isSoundOnSoundboard', { soundId, result });
@@ -53,7 +53,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   };
 
   const handlePlay = (soundId: string, filename: string) => {
-    console.log('handlePlay called', { soundId, filename });
+    console.log('handlePlay called', { soundId, filename, globalVolume });
     
     try {
       if (playingSound === soundId) {
@@ -62,10 +62,14 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
       } else {
         setPlayingSound(soundId);
         
-        // Create and play audio with proper path
-        const audioPath = filename.startsWith('/') ? filename : `/${filename}`;
+        // Create and play audio with proper path and volume
+        const audioPath = filename;
         console.log('Creating audio with path:', audioPath);
         const audio = new Audio(audioPath);
+        
+        // Set volume based on global volume
+        audio.volume = globalVolume / 100;
+        console.log('Setting library audio volume to:', audio.volume);
         
         audio.play()
           .then(() => {
@@ -86,12 +90,12 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
           setPlayingSound(null);
         };
         
-        // Demo: stop playing after 2 seconds
+        // Demo: stop playing after 3 seconds
         setTimeout(() => {
-          console.log('Stopping audio after 2 seconds (demo)');
+          console.log('Stopping audio after 3 seconds (demo)');
           setPlayingSound(null);
           audio.pause();
-        }, 2000);
+        }, 3000);
       }
     } catch (error) {
       console.error('Exception in handlePlay:', error);
