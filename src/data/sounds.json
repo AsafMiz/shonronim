@@ -3,7 +3,7 @@
   {
     "id": "1",
     "title": "?מי אומר לי שלום",
-    "filename": "/sounds/a.mp3",
+    "filename": "/a.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -11,7 +11,7 @@
   {
     "id": "2",
     "title": "2מי אומר לי שלום",
-    "filename": "/sounds/b.mp3",
+    "filename": "/b.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "2יורם שפטל"
@@ -19,7 +19,7 @@
   {
     "id": "3",
     "title": "3מי אומר לי שלום",
-    "filename": "/sounds/c.mp3",
+    "filename": "/c.mp3",
     "tags": ["שלום", "3שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -27,7 +27,7 @@
   {
     "id": "4",
     "title": "4מי אומר לי שלום",
-    "filename": "/sounds/d.mp3",
+    "filename": "/d.mp3",
     "tags": ["שלום", "3שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -35,7 +35,7 @@
   {
     "id": "5",
     "title": "?5מי אומר לי שלום",
-    "filename": "/sounds/e.mp3",
+    "filename": "/e.mp3",
     "tags": ["שלום", "3שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "3יורם שפטל"
@@ -43,7 +43,7 @@
   {
     "id": "6",
     "title": "?6מי אומר לי שלום",
-    "filename": "/sounds/f.mp3",
+    "filename": "/f.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -51,7 +51,7 @@
   {
     "id": "7",
     "title": "?7מי אומר לי שלום",
-    "filename": "/sounds/g.mp3",
+    "filename": "/g.mp3",
     "tags": ["7שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -59,7 +59,7 @@
   {
     "id": "8",
     "title": "?8מי אומר לי שלום",
-    "filename": "/sounds/h.mp3",
+    "filename": "/h.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -67,7 +67,7 @@
   {
     "id": "13",
     "title": "?13מי אומר לי שלום",
-    "filename": "/sounds/a.mp3",
+    "filename": "/a.mp3",
     "tags": ["שלום", "שפטל8"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל8"
@@ -75,7 +75,7 @@
   {
     "id": "9",
     "title": "?9מי אומר לי שלום",
-    "filename": "/sounds/b.mp3",
+    "filename": "/b.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל9"
@@ -83,7 +83,7 @@
   {
     "id": "10",
     "title": "?10מי אומר לי שלום",
-    "filename": "/sounds/c.mp3",
+    "filename": "/c.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
@@ -91,15 +91,15 @@
   {
     "id": "11",
     "title": "?11מי אומר לי שלום",
-    "filename": "/sounds/d.mp3",
+    "filename": "/d.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
   },
   {
     "id": "12",
-    "title": "?12מי אומר לי שלום",
-    "filename": "/sounds/e.mp3",
+    "title": "?/מי אומר לי שלום",
+    "filename": "e.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל12"
