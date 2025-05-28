@@ -31,7 +31,6 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   cubeColor, 
   globalVolume 
 }) => {
-  console.log('SoundCube rendered', { sound, index, cubeColor, globalVolume });
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -55,8 +54,9 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       }
 
       // Create new audio element
-      const audioPath = sound.filename;
-      console.log('Creating audio with path:', audioPath);
+      const soundsDirPath = "src/assets/";
+      const audioPath = soundsDirPath + sound.filename;
+      console.log('Creating audio with path::', audioPath);
       const audio = new Audio(audioPath);
       audioRef.current = audio;
       

@@ -3,7 +3,7 @@ import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import soundsData from '../data/sounds.json';
+import soundsData from '../assets/sounds.json';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface Sound {
@@ -20,7 +20,6 @@ interface SoundLibraryProps {
 }
 
 const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
-  console.log('SoundLibrary rendered');
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -30,10 +29,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
   const sounds: Sound[] = soundsData;
   const categories = [...new Set(sounds.map(sound => sound.category))];
-
-  console.log('Loaded sounds:', sounds);
-  console.log('Categories:', categories);
-  console.log('Global volume in library:', globalVolume);
 
   const filteredSounds = sounds.filter(sound => {
     const matchesSearch = searchTerm === '' || 
@@ -48,7 +43,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
   const isSoundOnSoundboard = (soundId: string): boolean => {
     const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
-    console.log('isSoundOnSoundboard', { soundId, result });
     return result;
   };
 
@@ -63,13 +57,13 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
         setPlayingSound(soundId);
         
         // Create and play audio with proper path and volume
-        const audioPath = filename;
+        const soundsDirPath = "src/assets/";
+        const audioPath = soundsDirPath + filename;
         console.log('Creating audio with path:', audioPath);
         const audio = new Audio(audioPath);
         
         // Set volume based on global volume
         audio.volume = globalVolume / 100;
-        console.log('Setting library audio volume to:', audio.volume);
         
         audio.play()
           .then(() => {

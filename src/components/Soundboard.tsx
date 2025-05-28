@@ -5,7 +5,7 @@ import SoundLibrary from './SoundLibrary';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Slider } from '@/components/ui/slider';
 import { Volume2 } from 'lucide-react';
-import soundsData from '../data/sounds.json';
+import soundsData from '../assets/sounds.json';
 
 interface Sound {
   id: string;
