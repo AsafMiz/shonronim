@@ -3,7 +3,7 @@
   {
     "id": "1",
     "title": "?מי אומר לי שלום",
-    "filename": "./src/data/sounds/1.mp3",
+    "filename": "src/data/sounds/1.mp3",
     "tags": ["שלום", "שפטל"],
     "hidden_tags": ["הלו", "יפה"],
     "category": "יורם שפטל"
