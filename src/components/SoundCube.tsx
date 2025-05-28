@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -34,9 +33,8 @@ const SoundCube: React.FC<SoundCubeProps> = ({ sound, onAddSound, onRemoveSound,
       audioRef.current.currentTime = 0;
     }
 
-    // Create audio element for demo purposes (in real app, you'd load actual files)
-    audioRef.current = new Audio();
-    audioRef.current.src = sound.filename;
+    // Create audio element and use the correct path
+    audioRef.current = new Audio(sound.filename);
     
     setIsPlaying(true);
     audioRef.current.play().catch(console.error);

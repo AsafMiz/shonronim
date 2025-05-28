@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import soundsData from '../data/sounds.json';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface Sound {
   id: string;
@@ -23,6 +24,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
+  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
 
   const sounds: Sound[] = soundsData;
   const categories = [...new Set(sounds.map(sound => sound.category))];
@@ -38,14 +40,28 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     return matchesSearch && matchesCategory;
   });
 
-  const handlePlay = (soundId: string) => {
+  const isSoundOnSoundboard = (soundId: string): boolean => {
+    return soundboardSounds.some(boardSound => boardSound?.id === soundId);
+  };
+
+  const handlePlay = (soundId: string, filename: string) => {
     if (playingSound === soundId) {
       setPlayingSound(null);
     } else {
       setPlayingSound(soundId);
+      
+      // Create and play audio
+      const audio = new Audio(filename);
+      audio.play().catch(console.error);
+      
+      audio.onended = () => {
+        setPlayingSound(null);
+      };
+      
       // Demo: stop playing after 2 seconds
       setTimeout(() => {
         setPlayingSound(null);
+        audio.pause();
       }, 2000);
     }
   };
@@ -104,60 +120,65 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
       {/* Sound grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredSounds.map(sound => (
-          <div
-            key={sound.id}
-            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold text-gray-800 truncate ml-2">
-                {sound.title}
-              </h3>
-              <div className="flex gap-1">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-8 h-8 p-0"
-                  onClick={() => handlePlay(sound.id)}
-                >
-                  <Play 
-                    className={`w-4 h-4 ${playingSound === sound.id ? 'animate-pulse' : ''}`} 
-                    fill={playingSound === sound.id ? 'currentColor' : 'none'}
-                  />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-8 h-8 p-0"
-                  onClick={() => handleShare(sound)}
-                >
-                  <Share className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  className="w-8 h-8 p-0"
-                  onClick={() => handleAddToSoundboard(sound)}
-                >
-                  <Plus className="w-4 h-4" />
-                </Button>
+        {filteredSounds.map(sound => {
+          const isOnSoundboard = isSoundOnSoundboard(sound.id);
+          
+          return (
+            <div
+              key={sound.id}
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-gray-800 truncate ml-2">
+                  {sound.title}
+                </h3>
+                <div className="flex gap-1">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-8 h-8 p-0"
+                    onClick={() => handlePlay(sound.id, sound.filename)}
+                  >
+                    <Play 
+                      className={`w-4 h-4 ${playingSound === sound.id ? 'animate-pulse' : ''}`} 
+                      fill={playingSound === sound.id ? 'currentColor' : 'none'}
+                    />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-8 h-8 p-0"
+                    onClick={() => handleShare(sound)}
+                  >
+                    <Share className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    className={`w-8 h-8 p-0 ${isOnSoundboard ? 'bg-green-500 hover:bg-green-600' : ''}`}
+                    onClick={() => handleAddToSoundboard(sound)}
+                    disabled={isOnSoundboard}
+                  >
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="mb-2">
+                <Badge variant="secondary" className="text-xs">
+                  {sound.category}
+                </Badge>
+              </div>
+
+              <div className="flex flex-wrap gap-1">
+                {sound.tags.map(tag => (
+                  <Badge key={tag} variant="outline" className="text-xs">
+                    {tag}
+                  </Badge>
+                ))}
               </div>
             </div>
-
-            <div className="mb-2">
-              <Badge variant="secondary" className="text-xs">
-                {sound.category}
-              </Badge>
-            </div>
-
-            <div className="flex flex-wrap gap-1">
-              {sound.tags.map(tag => (
-                <Badge key={tag} variant="outline" className="text-xs">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {filteredSounds.length === 0 && (
