@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,6 @@ interface SoundCubeProps {
   onRemoveSound: () => void;
   index: number;
   cubeColor: string;
-  globalVolume: number;
 }
 
 const SoundCube: React.FC<SoundCubeProps> = ({ 
@@ -28,8 +26,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   onAddSound, 
   onRemoveSound, 
   index, 
-  cubeColor, 
-  globalVolume 
+  cubeColor
 }) => {
   
   const [isPlaying, setIsPlaying] = useState(false);
@@ -37,7 +34,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlay = () => {
-    console.log('SoundCube handlePlay called', { sound, globalVolume });
+    console.log('SoundCube handlePlay called', { sound });
     if (!sound) {
       console.log('SoundCube: No sound available');
       return;
@@ -59,10 +56,6 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       console.log('SoundCube: Creating audio with path::', audioPath);
       const audio = new Audio(audioPath);
       audioRef.current = audio;
-      
-      // Set volume based on global volume
-      audio.volume = globalVolume / 100;
-      console.log('SoundCube: Setting audio volume to:', audio.volume);
       
       setIsPlaying(true);
       
@@ -159,10 +152,11 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group h-full">
       <div className={`
-        relative w-full aspect-square rounded-xl overflow-hidden
+        relative w-full h-full rounded-lg overflow-hidden
         transition-all duration-300 transform hover:scale-105
+        min-h-[80px] sm:min-h-[120px]
         ${sound 
           ? `bg-gradient-to-br ${cubeColor} shadow-lg hover:shadow-xl` 
           : 'bg-gradient-to-br from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 border-2 border-dashed border-gray-400'
@@ -170,7 +164,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       `}>
         {/* Main content area */}
         <div 
-          className="w-full h-full flex items-center justify-center cursor-pointer"
+          className="w-full h-full flex items-center justify-center cursor-pointer p-2"
           onClick={sound ? handlePlay : handleAddSound}
         >
           {sound ? (
@@ -178,38 +172,38 @@ const SoundCube: React.FC<SoundCubeProps> = ({
               {isPlaying ? (
                 <SoundWaveAnimation isPlaying={isPlaying} />
               ) : (
-                <Play className="w-8 h-8 mx-auto" fill="white" />
+                <Play className="w-6 h-6 sm:w-8 sm:h-8 mx-auto" fill="white" />
               )}
             </div>
           ) : (
-            <Plus className="w-8 h-8 text-gray-600" />
+            <Plus className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600" />
           )}
         </div>
 
-        {/* Action buttons overlay - always visible on mobile, hover on desktop */}
+        {/* Action buttons overlay - always visible */}
         {sound && (
-          <div className="absolute top-2 right-2 flex gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
+          <div className="absolute top-1 right-1 flex gap-1">
             <Button
               size="sm"
               variant="secondary"
-              className="w-8 h-8 p-0 bg-white/20 hover:bg-white/30 border-none"
+              className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-white/20 hover:bg-white/30 border-none"
               onClick={(e) => {
                 e.stopPropagation();
                 handleShare();
               }}
             >
-              <Share className="w-4 h-4 text-white" />
+              <Share className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
             </Button>
             <Button
               size="sm"
               variant="destructive"
-              className="w-8 h-8 p-0 bg-red-500/80 hover:bg-red-600/80"
+              className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-red-500/80 hover:bg-red-600/80"
               onClick={(e) => {
                 e.stopPropagation();
                 handleRemove();
               }}
             >
-              <Trash className="w-4 h-4" />
+              <Trash className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
           </div>
         )}
@@ -217,8 +211,8 @@ const SoundCube: React.FC<SoundCubeProps> = ({
 
       {/* Sound title */}
       {sound && (
-        <div className="mt-2 text-center">
-          <p className="text-sm font-medium text-gray-800 truncate">
+        <div className="mt-1 sm:mt-2 text-center">
+          <p className="text-xs sm:text-sm font-medium text-gray-800 truncate px-1">
             {sound.title}
           </p>
         </div>

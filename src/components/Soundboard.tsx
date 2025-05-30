@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
@@ -20,7 +19,6 @@ const Soundboard: React.FC = () => {
   const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
-  const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
 
   const sounds: Sound[] = soundsData;
   console.log('Soundboard sounds loaded:', sounds);
@@ -135,23 +133,24 @@ const Soundboard: React.FC = () => {
   }
 
   return (
-    <div className="p-4 max-w-4xl mx-auto" dir="rtl">
-      <div className="mb-6 text-center">
-        <p className="text-gray-600">לחץ על הקוביות לנגן צלילים או הוסף חדשים</p>
+    <div className="h-[calc(100vh-120px)] flex flex-col" dir="rtl">
+      <div className="p-2 sm:p-4 text-center">
+        <p className="text-sm text-gray-600">לחץ על הקוביות לנגן צלילים או הוסף חדשים</p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {soundboardSounds.map((sound, index) => (
-          <SoundCube
-            key={index}
-            sound={sound}
-            onAddSound={() => handleAddSound(index)}
-            onRemoveSound={() => handleRemoveSound(index)}
-            index={index}
-            cubeColor={cubeColors[index]}
-            globalVolume={globalVolume}
-          />
-        ))}
+      <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 h-full max-w-4xl mx-auto">
+          {soundboardSounds.map((sound, index) => (
+            <SoundCube
+              key={index}
+              sound={sound}
+              onAddSound={() => handleAddSound(index)}
+              onRemoveSound={() => handleRemoveSound(index)}
+              index={index}
+              cubeColor={cubeColors[index]}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

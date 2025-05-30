@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Share } from 'lucide-react';
 import Soundboard from '../components/Soundboard';
 import SoundLibrary from '../components/SoundLibrary';
+import CreatorPage from '../components/CreatorPage';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface Sound {
@@ -34,22 +36,53 @@ const Index = () => {
     window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley', '_blank');
   };
 
+  const handleShareApp = async () => {
+    const shareData = {
+      title: 'לוח הצלילים - שונרונים',
+      text: '🔊 בואו תשמעו את לוח הצלילים הכי מגניב!',
+      url: window.location.origin
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback to WhatsApp
+        const text = `${shareData.text} ${shareData.url}`;
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      }
+    } catch (error) {
+      console.error('Error sharing app:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" dir="rtl">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-800">
-              🔊 לוח הצלילים
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+              🔊 שונרונים
             </h1>
             
-            <Button 
-              onClick={handleSupportCreator}
-              className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 text-white font-medium"
-            >
-              ❤️ תמכו ביוצר
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                onClick={handleShareApp}
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50 font-medium"
+              >
+                <Share className="w-4 h-4 ml-1" />
+                שתף
+              </Button>
+              <Button 
+                onClick={handleSupportCreator}
+                className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 text-white font-medium"
+              >
+                ❤️ תמכו ביוצר
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -61,15 +94,21 @@ const Index = () => {
             <TabsList className="h-12 w-full bg-transparent p-0">
               <TabsTrigger 
                 value="soundboard" 
-                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium"
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
               >
                 לוח הצלילים
               </TabsTrigger>
               <TabsTrigger 
                 value="library" 
-                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium"
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
               >
                 ספריית צלילים
+              </TabsTrigger>
+              <TabsTrigger 
+                value="creator" 
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
+              >
+                על היוצר
               </TabsTrigger>
             </TabsList>
           </div>
@@ -80,6 +119,10 @@ const Index = () => {
 
           <TabsContent value="library" className="mt-0">
             <SoundLibrary onAddToSoundboard={handleAddToSoundboard} />
+          </TabsContent>
+
+          <TabsContent value="creator" className="mt-0">
+            <CreatorPage />
           </TabsContent>
         </Tabs>
       </main>
