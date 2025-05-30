@@ -16,7 +16,7 @@ interface Sound {
 const Soundboard: React.FC = () => {
   console.log('Soundboard rendered');
   
-  const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
+  const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(6).fill(null));
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
 
@@ -30,9 +30,7 @@ const Soundboard: React.FC = () => {
     'from-orange-500 to-red-600',
     'from-pink-500 to-rose-600',
     'from-indigo-500 to-blue-600',
-    'from-yellow-500 to-orange-600',
-    'from-purple-500 to-pink-600',
-    'from-cyan-500 to-blue-600'
+    'from-yellow-500 to-orange-600'
   ];
 
   // Initialize with random sounds on first visit - but allow all empty cubes
@@ -44,7 +42,7 @@ const Soundboard: React.FC = () => {
     if (!hasBeenInitialized) {
       try {
         const shuffledSounds = [...sounds].sort(() => Math.random() - 0.5);
-        const initialSounds = new Array(8).fill(null);
+        const initialSounds = new Array(6).fill(null);
         
         // Fill first 4 positions with random sounds
         for (let i = 0; i < 4 && i < shuffledSounds.length; i++) {
@@ -139,7 +137,7 @@ const Soundboard: React.FC = () => {
       </div>
 
       <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 h-full max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 h-full max-w-4xl mx-auto">
           {soundboardSounds.map((sound, index) => (
             <SoundCube
               key={index}

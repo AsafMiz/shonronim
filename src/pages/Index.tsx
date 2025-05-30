@@ -19,7 +19,7 @@ interface Sound {
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('soundboard');
-  const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
+  const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(6).fill(null));
 
   const handleAddToSoundboard = (sound: Sound): boolean => {
     const emptyIndex = soundboardSounds.findIndex(s => s === null);

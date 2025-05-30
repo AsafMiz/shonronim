@@ -46,9 +46,29 @@ const CreatorPage: React.FC = () => {
         {/* Latest Post Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">הפוסט האחרון</h3>
-          <p className="text-gray-700 mb-4">
-            צפו בתוכן החדש ביותר מהיוצר
-          </p>
+          
+          {/* Instagram Post Preview */}
+          <div className="mb-4 border rounded-lg overflow-hidden bg-gray-50">
+            <div className="p-4 border-b bg-white">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <Instagram className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-medium text-gray-800">taichovitz</span>
+              </div>
+            </div>
+            <div className="aspect-square bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+              <div className="text-center text-gray-600">
+                <Instagram className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                <p className="text-sm">תמונת התצוגה המקדימה של הפוסט</p>
+              </div>
+            </div>
+            <div className="p-4 bg-white">
+              <p className="text-sm text-gray-700">
+                צפו בתוכן החדש ביותר מהיוצר...
+              </p>
+            </div>
+          </div>
           
           <Button 
             onClick={handleLatestPostClick}
