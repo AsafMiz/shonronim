@@ -37,16 +37,16 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlay = () => {
-    console.log('handlePlay called', { sound, globalVolume });
+    console.log('SoundCube handlePlay called', { sound, globalVolume });
     if (!sound) {
-      console.log('No sound available');
+      console.log('SoundCube: No sound available');
       return;
     }
 
     try {
       // If currently playing, restart the sound
       if (audioRef.current) {
-        console.log('Stopping and restarting audio');
+        console.log('SoundCube: Stopping and restarting audio');
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
         audioRef.current = null;
@@ -56,82 +56,85 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       // Create new audio element
       const soundsDirPath = "sounds/";
       const audioPath = soundsDirPath + sound.filename;
-      console.log('Creating audio with path::', audioPath);
+      console.log('SoundCube: Creating audio with path::', audioPath);
       const audio = new Audio(audioPath);
       audioRef.current = audio;
       
       // Set volume based on global volume
       audio.volume = globalVolume / 100;
-      console.log('Setting audio volume to:', audio.volume);
+      console.log('SoundCube: Setting audio volume to:', audio.volume);
       
       setIsPlaying(true);
       
       audio.play()
         .then(() => {
-          console.log('Audio started playing successfully');
+          console.log('SoundCube: Audio started playing successfully');
         })
         .catch((error) => {
-          console.error('Error playing audio:', error);
+          console.error('SoundCube: Error playing audio:', error);
           setIsPlaying(false);
           audioRef.current = null;
         });
 
       audio.onended = () => {
-        console.log('Audio playback ended');
+        console.log('SoundCube: Audio playback ended');
         setIsPlaying(false);
         audioRef.current = null;
       };
 
       audio.onerror = (error) => {
-        console.error('Audio error:', error);
+        console.error('SoundCube: Audio error:', error);
         setIsPlaying(false);
         audioRef.current = null;
       };
-
-      // For demo purposes - remove this setTimeout in production
-      setTimeout(() => {
-        if (audioRef.current === audio) {
-          console.log('Stopping audio after 3 seconds (demo)');
-          setIsPlaying(false);
-          audio.pause();
-          audioRef.current = null;
-        }
-      }, 3000);
     } catch (error) {
-      console.error('Exception in handlePlay:', error);
+      console.error('SoundCube: Exception in handlePlay:', error);
       setIsPlaying(false);
       audioRef.current = null;
     }
   };
 
-  const handleShare = () => {
-    console.log('handleShare called', { sound });
+  const handleShare = async () => {
+    console.log('SoundCube handleShare called', { sound });
     if (!sound) {
-      console.log('No sound to share');
+      console.log('SoundCube: No sound to share');
       return;
     }
     
     try {
-      const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
-      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-      console.log('Opening WhatsApp with URL:', url);
-      window.open(url, '_blank');
+      const soundUrl = `${window.location.origin}/sounds/${sound.filename}`;
+      
+      if (navigator.share) {
+        // Use native sharing if available
+        await navigator.share({
+          title: sound.title,
+          text: `🔊 תשמע את הצליל הזה: ${sound.title}`,
+          url: soundUrl
+        });
+        console.log('SoundCube: Shared via native share API');
+      } else {
+        // Fallback to WhatsApp
+        const text = `🔊 תשמע את הצליל הזה: ${sound.title} ${soundUrl}`;
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        console.log('SoundCube: Opening WhatsApp with URL:', url);
+        window.open(url, '_blank');
+      }
     } catch (error) {
-      console.error('Exception in handleShare:', error);
+      console.error('SoundCube: Exception in handleShare:', error);
     }
   };
 
   const handleRemove = () => {
-    console.log('handleRemove called');
+    console.log('SoundCube handleRemove called');
     try {
       setShowConfirm(true);
     } catch (error) {
-      console.error('Exception in handleRemove:', error);
+      console.error('SoundCube: Exception in handleRemove:', error);
     }
   };
 
   const confirmRemove = () => {
-    console.log('confirmRemove called');
+    console.log('SoundCube confirmRemove called');
     try {
       // Stop audio if playing
       if (audioRef.current) {
@@ -142,16 +145,16 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       onRemoveSound();
       setShowConfirm(false);
     } catch (error) {
-      console.error('Exception in confirmRemove:', error);
+      console.error('SoundCube: Exception in confirmRemove:', error);
     }
   };
 
   const handleAddSound = () => {
-    console.log('handleAddSound called');
+    console.log('SoundCube handleAddSound called');
     try {
       onAddSound();
     } catch (error) {
-      console.error('Exception in handleAddSound:', error);
+      console.error('SoundCube: Exception in handleAddSound:', error);
     }
   };
 
@@ -183,9 +186,9 @@ const SoundCube: React.FC<SoundCubeProps> = ({
           )}
         </div>
 
-        {/* Action buttons overlay */}
+        {/* Action buttons overlay - always visible on mobile, hover on desktop */}
         {sound && (
-          <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="absolute top-2 right-2 flex gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
             <Button
               size="sm"
               variant="secondary"

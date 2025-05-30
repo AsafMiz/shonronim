@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -42,16 +43,18 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   });
 
   const isSoundOnSoundboard = (soundId: string): boolean => {
+    console.log('SoundLibrary: isSoundOnSoundboard called', { soundId });
     const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
+    console.log('SoundLibrary: isSoundOnSoundboard result:', result);
     return result;
   };
 
   const handlePlay = (soundId: string, filename: string) => {
-    console.log('handlePlay called', { soundId, filename, globalVolume });
+    console.log('SoundLibrary handlePlay called', { soundId, filename, globalVolume });
 
     try {
       if (playingSound === soundId) {
-        console.log('Stopping currently playing sound');
+        console.log('SoundLibrary: Stopping currently playing sound');
         setPlayingSound(null);
       } else {
         setPlayingSound(soundId);
@@ -59,7 +62,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
         // Create and play audio with proper path and volume
         const soundsDirPath = "sounds/";
         const audioPath = soundsDirPath + filename;
-        console.log('Creating audio with path:', audioPath);
+        console.log('SoundLibrary: Creating audio with path:', audioPath);
         const audio = new Audio(audioPath);
 
         // Set volume based on global volume
@@ -67,60 +70,66 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
         audio.play()
           .then(() => {
-            console.log('Audio started playing successfully');
+            console.log('SoundLibrary: Audio started playing successfully');
           })
           .catch((error) => {
-            console.error('Error playing audio:', error);
+            console.error('SoundLibrary: Error playing audio:', error);
             setPlayingSound(null);
           });
 
         audio.onended = () => {
-          console.log('Audio playback ended');
+          console.log('SoundLibrary: Audio playback ended');
           setPlayingSound(null);
         };
 
         audio.onerror = (error) => {
-          console.error('Audio error:', error);
+          console.error('SoundLibrary: Audio error:', error);
           setPlayingSound(null);
         };
-
-        // Demo: stop playing after 3 seconds
-        setTimeout(() => {
-          console.log('Stopping audio after 3 seconds (demo)');
-          setPlayingSound(null);
-          audio.pause();
-        }, 3000);
       }
     } catch (error) {
-      console.error('Exception in handlePlay:', error);
+      console.error('SoundLibrary: Exception in handlePlay:', error);
       setPlayingSound(null);
     }
   };
 
-  const handleShare = (sound: Sound) => {
-    console.log('handleShare called', { sound });
+  const handleShare = async (sound: Sound) => {
+    console.log('SoundLibrary handleShare called', { sound });
     try {
-      const text = `🔊 תשמע את הצליל הזה: ${sound.title}`;
-      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-      console.log('Opening WhatsApp with URL:', url);
-      window.open(url, '_blank');
+      const soundUrl = `${window.location.origin}/sounds/${sound.filename}`;
+      
+      if (navigator.share) {
+        // Use native sharing if available
+        await navigator.share({
+          title: sound.title,
+          text: `🔊 תשמע את הצליל הזה: ${sound.title}`,
+          url: soundUrl
+        });
+        console.log('SoundLibrary: Shared via native share API');
+      } else {
+        // Fallback to WhatsApp
+        const text = `🔊 תשמע את הצליל הזה: ${sound.title} ${soundUrl}`;
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        console.log('SoundLibrary: Opening WhatsApp with URL:', url);
+        window.open(url, '_blank');
+      }
     } catch (error) {
-      console.error('Exception in handleShare:', error);
+      console.error('SoundLibrary: Exception in handleShare:', error);
     }
   };
 
   const handleAddToSoundboard = (sound: Sound) => {
-    console.log('handleAddToSoundboard called', { sound });
+    console.log('SoundLibrary handleAddToSoundboard called', { sound });
     try {
       const success = onAddToSoundboard(sound);
       if (!success) {
-        console.log('No empty cubes available');
+        console.log('SoundLibrary: No empty cubes available');
         alert('אין קוביות פנויות בלוח הצלילים');
       } else {
-        console.log('Successfully added sound to soundboard');
+        console.log('SoundLibrary: Successfully added sound to soundboard');
       }
     } catch (error) {
-      console.error('Exception in handleAddToSoundboard:', error);
+      console.error('SoundLibrary: Exception in handleAddToSoundboard:', error);
     }
   };
 

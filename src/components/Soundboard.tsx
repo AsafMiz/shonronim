@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { Slider } from '@/components/ui/slider';
-import { Volume2 } from 'lucide-react';
 import soundsData from '../assets/sounds.json';
 
 interface Sound {
@@ -22,7 +20,7 @@ const Soundboard: React.FC = () => {
   const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
-  const [globalVolume, setGlobalVolume] = useLocalStorage<number>('globalVolume', 70);
+  const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
 
   const sounds: Sound[] = soundsData;
   console.log('Soundboard sounds loaded:', sounds);
@@ -41,9 +39,9 @@ const Soundboard: React.FC = () => {
 
   // Initialize with random sounds on first visit - but allow all empty cubes
   useEffect(() => {
-    console.log('useEffect: checking first visit');
+    console.log('Soundboard: useEffect: checking first visit');
     const hasBeenInitialized = localStorage.getItem('soundboard_initialized');
-    console.log('Has been initialized:', hasBeenInitialized);
+    console.log('Soundboard: Has been initialized:', hasBeenInitialized);
     
     if (!hasBeenInitialized) {
       try {
@@ -55,38 +53,38 @@ const Soundboard: React.FC = () => {
           initialSounds[i] = shuffledSounds[i];
         }
         
-        console.log('Setting initial sounds:', initialSounds);
+        console.log('Soundboard: Setting initial sounds:', initialSounds);
         setSoundboardSounds(initialSounds);
         localStorage.setItem('soundboard_initialized', 'true');
       } catch (error) {
-        console.error('Exception in useEffect initialization:', error);
+        console.error('Soundboard: Exception in useEffect initialization:', error);
       }
     }
   }, [sounds, setSoundboardSounds]);
 
   const handleAddSound = (cubeIndex: number) => {
-    console.log('handleAddSound called', { cubeIndex });
+    console.log('Soundboard handleAddSound called', { cubeIndex });
     try {
       setTargetCubeIndex(cubeIndex);
       setShowLibrary(true);
     } catch (error) {
-      console.error('Exception in handleAddSound:', error);
+      console.error('Soundboard: Exception in handleAddSound:', error);
     }
   };
 
   const handleRemoveSound = (cubeIndex: number) => {
-    console.log('handleRemoveSound called', { cubeIndex });
+    console.log('Soundboard handleRemoveSound called', { cubeIndex });
     try {
       const newSounds = [...soundboardSounds];
       newSounds[cubeIndex] = null;
       setSoundboardSounds(newSounds);
     } catch (error) {
-      console.error('Exception in handleRemoveSound:', error);
+      console.error('Soundboard: Exception in handleRemoveSound:', error);
     }
   };
 
   const handleAddToSoundboard = (sound: Sound): boolean => {
-    console.log('handleAddToSoundboard called', { sound, targetCubeIndex });
+    console.log('Soundboard handleAddToSoundboard called', { sound, targetCubeIndex });
     
     try {
       if (targetCubeIndex !== null) {
@@ -95,7 +93,7 @@ const Soundboard: React.FC = () => {
         setSoundboardSounds(newSounds);
         setShowLibrary(false);
         setTargetCubeIndex(null);
-        console.log('Added sound to specific cube:', targetCubeIndex);
+        console.log('Soundboard: Added sound to specific cube:', targetCubeIndex);
         return true;
       }
 
@@ -105,24 +103,15 @@ const Soundboard: React.FC = () => {
         const newSounds = [...soundboardSounds];
         newSounds[emptyIndex] = sound;
         setSoundboardSounds(newSounds);
-        console.log('Added sound to first empty cube:', emptyIndex);
+        console.log('Soundboard: Added sound to first empty cube:', emptyIndex);
         return true;
       }
 
-      console.log('No empty cubes available');
+      console.log('Soundboard: No empty cubes available');
       return false; // No empty cubes
     } catch (error) {
-      console.error('Exception in handleAddToSoundboard:', error);
+      console.error('Soundboard: Exception in handleAddToSoundboard:', error);
       return false;
-    }
-  };
-
-  const handleVolumeChange = (value: number[]) => {
-    console.log('handleVolumeChange called', { value });
-    try {
-      setGlobalVolume(value[0]);
-    } catch (error) {
-      console.error('Exception in handleVolumeChange:', error);
     }
   };
 
@@ -148,23 +137,6 @@ const Soundboard: React.FC = () => {
   return (
     <div className="p-4 max-w-4xl mx-auto" dir="rtl">
       <div className="mb-6 text-center">
-        <div className="flex items-center justify-center gap-4 mb-4">
-          <h2 className="text-2xl font-bold text-gray-800">לוח הצלילים שלי</h2>
-          <div className="flex items-center gap-2 bg-white rounded-lg p-2 shadow-sm">
-            <Volume2 className="w-4 h-4 text-gray-600" />
-            <div className="w-24">
-              <Slider
-                value={[globalVolume]}
-                onValueChange={handleVolumeChange}
-                max={100}
-                min={0}
-                step={1}
-                className="w-full"
-              />
-            </div>
-            <span className="text-sm text-gray-600 min-w-8">{globalVolume}%</span>
-          </div>
-        </div>
         <p className="text-gray-600">לחץ על הקוביות לנגן צלילים או הוסף חדשים</p>
       </div>
 
