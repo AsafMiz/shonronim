@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -180,43 +181,44 @@ const SoundCube: React.FC<SoundCubeProps> = ({
           )}
         </div>
 
-        {/* Action buttons overlay - always visible */}
+        {/* Sound title and action buttons overlay */}
         {sound && (
-          <div className="absolute top-1 right-1 flex gap-1">
-            <Button
-              size="sm"
-              variant="secondary"
-              className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-white/20 hover:bg-white/30 border-none"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleShare();
-              }}
-            >
-              <Share className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-            </Button>
-            <Button
-              size="sm"
-              variant="destructive"
-              className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-red-500/80 hover:bg-red-600/80"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleRemove();
-              }}
-            >
-              <Trash className="w-3 h-3 sm:w-4 sm:h-4" />
-            </Button>
+          <div className="absolute top-1 left-1 right-1 flex items-center justify-between">
+            {/* Sound title */}
+            <div className="flex-1 mr-1">
+              <p className="text-xs text-white font-medium truncate bg-black/20 px-1 py-0.5 rounded">
+                {sound.title}
+              </p>
+            </div>
+            
+            {/* Action buttons */}
+            <div className="flex gap-1">
+              <Button
+                size="sm"
+                variant="secondary"
+                className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-white/20 hover:bg-white/30 border-none"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShare();
+                }}
+              >
+                <Share className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                className="w-6 h-6 sm:w-8 sm:h-8 p-0 bg-red-500/80 hover:bg-red-600/80"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemove();
+                }}
+              >
+                <Trash className="w-3 h-3 sm:w-4 sm:h-4" />
+              </Button>
+            </div>
           </div>
         )}
       </div>
-
-      {/* Sound title */}
-      {sound && (
-        <div className="mt-1 sm:mt-2 text-center">
-          <p className="text-xs sm:text-sm font-medium text-gray-800 truncate px-1">
-            {sound.title}
-          </p>
-        </div>
-      )}
 
       <ConfirmDialog
         open={showConfirm}
