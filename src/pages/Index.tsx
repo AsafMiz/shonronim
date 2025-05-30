@@ -93,16 +93,16 @@ const Index = () => {
           <div className="bg-white shadow-sm border-b">
             <TabsList className="h-12 w-full bg-transparent p-0">
               <TabsTrigger 
-                value="soundboard" 
-                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
-              >
-                לוח הצלילים
-              </TabsTrigger>
-              <TabsTrigger 
                 value="library" 
                 className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
               >
                 ספריית צלילים
+              </TabsTrigger>
+              <TabsTrigger 
+                value="soundboard" 
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
+              >
+                לוח הצלילים
               </TabsTrigger>
               <TabsTrigger 
                 value="creator" 
