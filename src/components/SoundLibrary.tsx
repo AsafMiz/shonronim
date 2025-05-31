@@ -54,7 +54,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     const matchesCategory = selectedCategory === '' || sound.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
-  });
+  }).sort((a, b) => a.title.localeCompare(b.title, 'he'));
 
   const isSoundOnSoundboard = (soundId: string): boolean => {
     console.log('SoundLibrary: isSoundOnSoundboard called', { soundId });
