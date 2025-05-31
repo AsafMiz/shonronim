@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import soundsData from '../assets/sounds.json';
+import categoriesData from '../assets/categories.json';
 
 interface Sound {
   id: string;
@@ -13,6 +15,13 @@ interface Sound {
   category: string;
 }
 
+interface Category {
+  id: string;
+  name: string;
+  color: string;
+  isShown: boolean;
+}
+
 const Soundboard: React.FC = () => {
   console.log('Soundboard rendered');
   
@@ -21,17 +30,17 @@ const Soundboard: React.FC = () => {
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
 
   const sounds: Sound[] = soundsData;
+  const categories: Category[] = categoriesData;
   console.log('Soundboard sounds loaded:', sounds);
 
-  // Color palette for cubes - each cube gets a unique color when filled
-  const cubeColors = [
-    'from-blue-500 to-purple-600',
-    'from-green-500 to-teal-600',
-    'from-orange-500 to-red-600',
-    'from-pink-500 to-rose-600',
-    'from-indigo-500 to-blue-600',
-    'from-yellow-500 to-orange-600'
-  ];
+  // Default color for empty cubes
+  const defaultCubeColor = 'from-gray-200 to-gray-300';
+
+  // Function to get category color by category name
+  const getCategoryColor = (categoryName: string): string => {
+    const category = categories.find(cat => cat.name === categoryName);
+    return category ? category.color : defaultCubeColor;
+  };
 
   // Initialize with random sounds on first visit - but allow all empty cubes
   useEffect(() => {
@@ -145,7 +154,7 @@ const Soundboard: React.FC = () => {
               onAddSound={() => handleAddSound(index)}
               onRemoveSound={() => handleRemoveSound(index)}
               index={index}
-              cubeColor={cubeColors[index]}
+              cubeColor={sound ? getCategoryColor(sound.category) : defaultCubeColor}
             />
           ))}
         </div>
