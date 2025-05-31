@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import soundsData from '../assets/sounds.json';
+import categoriesData from '../assets/categories.json';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface Sound {
@@ -14,6 +14,13 @@ interface Sound {
   tags: string[];
   hidden_tags: string[];
   category: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  color: string;
+  isShown: boolean;
 }
 
 interface SoundLibraryProps {
@@ -29,7 +36,14 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
 
   const sounds: Sound[] = soundsData;
-  const categories = [...new Set(sounds.map(sound => sound.category))];
+  const categories: Category[] = categoriesData;
+  const categoryNames = [...new Set(sounds.map(sound => sound.category))];
+
+  // Function to get category color by category name
+  const getCategoryColor = (categoryName: string): string => {
+    const category = categories.find(cat => cat.name === categoryName);
+    return category ? category.color : 'from-gray-200 to-gray-300';
+  };
 
   const filteredSounds = sounds.filter(sound => {
     const matchesSearch = searchTerm === '' ||
@@ -159,12 +173,17 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
           >
             הכל
           </Button>
-          {categories.map(category => (
+          {categoryNames.map(category => (
             <Button
               key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
+              variant="outline"
               size="sm"
               onClick={() => setSelectedCategory(category)}
+              className={`${
+                selectedCategory === category 
+                  ? `bg-gradient-to-r ${getCategoryColor(category)} text-white border-transparent hover:opacity-90` 
+                  : `bg-gradient-to-r ${getCategoryColor(category)} text-white hover:opacity-80`
+              }`}
             >
               {category}
             </Button>
@@ -218,7 +237,10 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
               </div>
 
               <div className="mb-2">
-                <Badge variant="secondary" className="text-xs">
+                <Badge 
+                  variant="secondary" 
+                  className={`text-xs bg-gradient-to-r ${getCategoryColor(sound.category)} text-white`}
+                >
                   {sound.category}
                 </Badge>
               </div>
