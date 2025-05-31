@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
-  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(8).fill(null));
+  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(6).fill(null));
   const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
 
   const sounds: Sound[] = soundsData;
@@ -237,12 +238,11 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
               </div>
 
               <div className="mb-2">
-                <Badge 
-                  variant="secondary" 
-                  className={`text-xs bg-gradient-to-r ${getCategoryColor(sound.category)} text-white`}
+                <span 
+                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white bg-gradient-to-r ${getCategoryColor(sound.category)}`}
                 >
                   {sound.category}
-                </Badge>
+                </span>
               </div>
 
               <div className="flex flex-wrap gap-1">
