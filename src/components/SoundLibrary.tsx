@@ -38,12 +38,22 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
   const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
-  const categoryNames = [...new Set(sounds.map(sound => sound.category))];
 
-  // Function to get category color by category name
-  const getCategoryColor = (categoryName: string): string => {
-    const category = categories.find(cat => cat.name === categoryName);
-    return category ? category.color : 'from-gray-200 to-gray-300';
+  // Function to get category by ID
+  const getCategoryById = (categoryId: string): Category | undefined => {
+    return categories.find(cat => cat.id === categoryId);
+  };
+
+  // Function to get category color by category ID
+  const getCategoryColor = (categoryId: string): string => {
+    const category = getCategoryById(categoryId);
+    return category ? category.color : 'bg-gray-300';
+  };
+
+  // Function to get category name by category ID
+  const getCategoryName = (categoryId: string): string => {
+    const category = getCategoryById(categoryId);
+    return category ? category.name : 'לא ידוע';
   };
 
   const filteredSounds = sounds.filter(sound => {
@@ -174,19 +184,19 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
           >
             הכל
           </Button>
-          {categoryNames.map(category => (
+          {categories.map(category => (
             <Button
-              key={category}
+              key={category.id}
               variant="outline"
               size="sm"
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(category.id)}
               className={`${
-                selectedCategory === category 
-                  ? `bg-gradient-to-r ${getCategoryColor(category)} text-white border-transparent hover:opacity-90` 
-                  : `bg-gradient-to-r ${getCategoryColor(category)} text-white hover:opacity-80`
+                selectedCategory === category.id 
+                  ? `${category.color} text-white border-transparent hover:opacity-90` 
+                  : `${category.color} text-white hover:opacity-80`
               }`}
             >
-              {category}
+              {category.name}
             </Button>
           ))}
         </div>
@@ -239,9 +249,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
               <div className="mb-2">
                 <span 
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white bg-gradient-to-r ${getCategoryColor(sound.category)}`}
+                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
                 >
-                  {sound.category}
+                  {getCategoryName(sound.category)}
                 </span>
               </div>
 

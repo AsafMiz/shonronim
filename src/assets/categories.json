@@ -3,43 +3,43 @@
   {
     "id": "1",
     "name": "ברהנו טגניה",
-    "color": "from-blue-500 to-purple-600",
+    "color": "bg-blue-500",
     "isShown": true
   },
   {
     "id": "2", 
     "name": "שמעון פרס",
-    "color": "from-green-500 to-teal-600",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
     "id": "3",
     "name": "ברקו", 
-    "color": "from-orange-500 to-red-600",
+    "color": "bg-orange-500",
     "isShown": true
   },
   {
     "id": "4",
     "name": "ג׳אמיל חפוז",
-    "color": "from-pink-500 to-rose-600",
+    "color": "bg-pink-500",
     "isShown": true
   },
   {
     "id": "5",
     "name": "דורית",
-    "color": "from-indigo-500 to-blue-600",
+    "color": "bg-indigo-500",
     "isShown": true
   },
   {
     "id": "6",
     "name": "שון",
-    "color": "from-yellow-500 to-orange-600",
+    "color": "bg-yellow-500",
     "isShown": true
   },
   {
     "id": "7",
     "name": "יורם שפטל",
-    "color": "from-purple-500 to-pink-600",
+    "color": "bg-purple-500",
     "isShown": true
   }
 ]

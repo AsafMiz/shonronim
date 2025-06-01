@@ -34,11 +34,11 @@ const Soundboard: React.FC = () => {
   console.log('Soundboard sounds loaded:', sounds);
 
   // Default color for empty cubes
-  const defaultCubeColor = 'from-gray-200 to-gray-300';
+  const defaultCubeColor = 'bg-gray-300';
 
-  // Function to get category color by category name
-  const getCategoryColor = (categoryName: string): string => {
-    const category = categories.find(cat => cat.name === categoryName);
+  // Function to get category color by category ID
+  const getCategoryColor = (categoryId: string): string => {
+    const category = categories.find(cat => cat.id === categoryId);
     return category ? category.color : defaultCubeColor;
   };
 
