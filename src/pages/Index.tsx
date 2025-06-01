@@ -121,7 +121,10 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="library" className="mt-0">
-            <SoundLibrary onAddToSoundboard={handleAddToSoundboard} />
+            <SoundLibrary 
+              onAddToSoundboard={handleAddToSoundboard} 
+              soundboardSounds={soundboardSounds}
+            />
           </TabsContent>
 
           <TabsContent value="creator" className="mt-0">

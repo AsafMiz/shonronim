@@ -1,0 +1,27 @@
+
+[
+  {
+    "id": "1",
+    "title": "קורס הקמת אתרים",
+    "description": "למד ליצור אתרים מקצועיים בצורה קלה ומהירה",
+    "image_url": "/placeholder.svg",
+    "button_title": "לפרטים נוספים",
+    "link": "https://example.com/course1"
+  },
+  {
+    "id": "2", 
+    "title": "מדריך שיווק דיגיטלי",
+    "description": "כל מה שצריך לדעת על שיווק ברשתות החברתיות",
+    "image_url": "/placeholder.svg",
+    "button_title": "צפה עכשיו",
+    "link": "https://example.com/course2"
+  },
+  {
+    "id": "3",
+    "title": "אירוע מיוחד",
+    "description": "הצטרף לאירוע הגדול של השנה עם ההטבות הכי טובות",
+    "image_url": "/placeholder.svg", 
+    "button_title": "הרשמה",
+    "link": "https://example.com/event"
+  }
+]

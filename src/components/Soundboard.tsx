@@ -134,7 +134,10 @@ const Soundboard: React.FC = () => {
             {APP_CONFIG.STRINGS.BACK_TO_SOUNDBOARD}
           </button>
         </div>
-        <SoundLibrary onAddToSoundboard={handleAddToSoundboard} />
+        <SoundLibrary 
+          onAddToSoundboard={handleAddToSoundboard} 
+          soundboardSounds={soundboardSounds}
+        />
       </div>
     );
   }

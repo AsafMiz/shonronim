@@ -26,17 +26,14 @@ interface Category {
 
 interface SoundLibraryProps {
   onAddToSoundboard: (sound: Sound) => boolean;
+  soundboardSounds: (Sound | null)[];
 }
 
-const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
+const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboardSounds }) => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
-  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>(
-    APP_CONFIG.STORAGE_KEYS.SOUNDBOARD, 
-    new Array(APP_CONFIG.SOUNDBOARD_CUBES_COUNT).fill(null)
-  );
   const [globalVolume] = useLocalStorage<number>(
     APP_CONFIG.STORAGE_KEYS.GLOBAL_VOLUME, 
     APP_CONFIG.DEFAULT_GLOBAL_VOLUME
@@ -78,6 +75,10 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
     const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
     console.log('SoundLibrary: isSoundOnSoundboard result:', result);
     return result;
+  };
+
+  const hasAvailableCubes = (): boolean => {
+    return soundboardSounds.some(boardSound => boardSound === null);
   };
 
   const handlePlay = (soundId: string, filename: string) => {
@@ -152,10 +153,16 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const handleAddToSoundboard = (sound: Sound) => {
     console.log('SoundLibrary handleAddToSoundboard called', { sound });
     try {
+      if (!hasAvailableCubes()) {
+        console.log('SoundLibrary: No empty cubes available');
+        alert(APP_CONFIG.STRINGS.NO_EMPTY_CUBES);
+        return;
+      }
+      
       const success = onAddToSoundboard(sound);
       if (!success) {
-        console.log('SoundLibrary: No empty cubes available');
-        alert('אין קוביות פנויות בלוח הצלילים');
+        console.log('SoundLibrary: Failed to add sound to soundboard');
+        alert(APP_CONFIG.STRINGS.NO_EMPTY_CUBES);
       } else {
         console.log('SoundLibrary: Successfully added sound to soundboard');
       }
@@ -213,6 +220,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
       <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
         {filteredSounds.map(sound => {
           const isOnSoundboard = isSoundOnSoundboard(sound.id);
+          const availableCubes = hasAvailableCubes();
 
           return (
             <div
@@ -247,7 +255,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
                     size="sm"
                     className={`w-8 h-8 p-0 ${isOnSoundboard ? 'bg-green-500 hover:bg-green-600' : ''}`}
                     onClick={() => handleAddToSoundboard(sound)}
-                    disabled={isOnSoundboard}
+                    disabled={isOnSoundboard || !availableCubes}
                   >
                     <Plus className="w-4 h-4" />
                   </Button>
