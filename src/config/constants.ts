@@ -38,7 +38,7 @@ export const APP_CONFIG = {
   
   // Local storage keys
   STORAGE_KEYS: {
-    SOUNDBOARD: 'soundboard',
+    SOUNDBOARD: 'soundboard1',
     INITIALIZED: 'soundboard_initialized',
     GLOBAL_VOLUME: 'globalVolume'
   }
