@@ -56,7 +56,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   // Function to get category name by category ID
   const getCategoryName = (categoryId: string): string => {
     const category = getCategoryById(categoryId);
-    return category ? category.name : 'לא ידוע';
+    return category ? category.name : 'אחר';
   };
 
   const filteredSounds = sounds.filter(sound => {

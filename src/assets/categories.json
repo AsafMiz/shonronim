@@ -3,7 +3,7 @@
   {
     "id": "1",
     "name": "ברהנו טגניה",
-    "color": "bg-blue-500",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
@@ -15,31 +15,31 @@
   {
     "id": "3",
     "name": "ברקו", 
-    "color": "bg-orange-500",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
     "id": "4",
     "name": "ג׳אמיל חפוז",
-    "color": "bg-pink-500",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
     "id": "5",
     "name": "דורית",
-    "color": "bg-indigo-500",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
     "id": "6",
     "name": "שון",
-    "color": "bg-yellow-500",
+    "color": "bg-green-500",
     "isShown": true
   },
   {
     "id": "7",
     "name": "יורם שפטל",
-    "color": "bg-purple-500",
+    "color": "bg-green-500",
     "isShown": true
   }
 ]

@@ -6,7 +6,7 @@ export const APP_CONFIG = {
   
   // UI strings
   STRINGS: {
-    APP_TITLE: '🔊 שונרונים',
+    APP_TITLE: '🔊 כת שונרונים',
     SOUNDBOARD_INSTRUCTIONS: 'לחץ על הקוביות לנגן צלילים או הוסף חדשים',
     BACK_TO_SOUNDBOARD: '← חזרה ללוח הצלילים',
     SOUND_LIBRARY_TITLE: 'ספריית צלילים',
@@ -26,7 +26,7 @@ export const APP_CONFIG = {
   },
   
   // Default values
-  DEFAULT_CUBE_COLOR: 'bg-gray-300',
+  DEFAULT_CUBE_COLOR: 'bg-red-300',
   DEFAULT_GLOBAL_VOLUME: 70,
   SOUNDS_DIRECTORY: 'sounds/',
   

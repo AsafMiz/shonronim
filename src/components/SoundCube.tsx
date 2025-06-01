@@ -159,7 +159,7 @@ const SoundCube: React.FC<SoundCubeProps> = ({
         transition-all duration-300 transform hover:scale-105
         min-h-[80px] sm:min-h-[120px]
         ${sound 
-          ? `bg-gradient-to-br ${cubeColor} shadow-lg hover:shadow-xl` 
+          ? `${cubeColor} shadow-lg hover:shadow-xl` 
           : 'bg-gradient-to-br from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 border-2 border-dashed border-gray-400'
         }
       `}>

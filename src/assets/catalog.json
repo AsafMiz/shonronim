@@ -7,7 +7,7 @@
     "image_url": "/placeholder.svg",
     "button_title": "לפרטים נוספים",
     "link": "https://example.com/course1",
-    "isShown": true
+    "isShown": false
   },
   {
     "id": "2", 
@@ -16,7 +16,7 @@
     "image_url": "/placeholder.svg",
     "button_title": "צפה עכשיו",
     "link": "https://example.com/course2",
-    "isShown": true
+    "isShown": false
   },
   {
     "id": "3",
@@ -25,6 +25,6 @@
     "image_url": "/placeholder.svg", 
     "button_title": "הרשמה",
     "link": "https://example.com/event",
-    "isShown": true
+    "isShown": false
   }
 ]

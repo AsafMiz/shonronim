@@ -41,7 +41,11 @@ const Soundboard: React.FC = () => {
   // Function to get category color by category ID
   const getCategoryColor = (categoryId: string): string => {
     const category = categories.find(cat => cat.id === categoryId);
-    return category ? category.color : APP_CONFIG.DEFAULT_CUBE_COLOR;
+    console.log('category');
+    console.log(category);
+    const color = category ? category.color : APP_CONFIG.DEFAULT_CUBE_COLOR 
+    console.log(color);
+    return color;
   };
 
   // Initialize with random sounds on first visit - but allow all empty cubes
