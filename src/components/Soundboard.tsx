@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
@@ -31,6 +32,7 @@ const Soundboard: React.FC = () => {
   );
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
+  const [, forceUpdate] = useState({});
 
   const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
@@ -83,6 +85,8 @@ const Soundboard: React.FC = () => {
       const newSounds = [...soundboardSounds];
       newSounds[cubeIndex] = null;
       setSoundboardSounds(newSounds);
+      // Force a re-render to update the cube immediately
+      forceUpdate({});
     } catch (error) {
       console.error('Soundboard: Exception in handleRemoveSound:', error);
     }
@@ -98,6 +102,8 @@ const Soundboard: React.FC = () => {
         setSoundboardSounds(newSounds);
         setShowLibrary(false);
         setTargetCubeIndex(null);
+        // Force a re-render to update the cube color immediately
+        forceUpdate({});
         console.log('Soundboard: Added sound to specific cube:', targetCubeIndex);
         return true;
       }
@@ -108,6 +114,8 @@ const Soundboard: React.FC = () => {
         const newSounds = [...soundboardSounds];
         newSounds[emptyIndex] = sound;
         setSoundboardSounds(newSounds);
+        // Force a re-render to update the cube color immediately
+        forceUpdate({});
         console.log('Soundboard: Added sound to first empty cube:', emptyIndex);
         return true;
       }
@@ -152,7 +160,7 @@ const Soundboard: React.FC = () => {
         <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-2 sm:gap-4 h-full max-w-4xl mx-auto`}>
           {soundboardSounds.map((sound, index) => (
             <SoundCube
-              key={index}
+              key={`${index}-${sound?.id || 'empty'}`}
               sound={sound}
               onAddSound={() => handleAddSound(index)}
               onRemoveSound={() => handleRemoveSound(index)}

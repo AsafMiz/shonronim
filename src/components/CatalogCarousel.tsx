@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import catalogData from '../assets/catalog.json';
 
 interface CatalogItem {
@@ -11,10 +11,11 @@ interface CatalogItem {
   image_url: string;
   button_title: string;
   link: string;
+  isShown: boolean;
 }
 
 const CatalogCarousel: React.FC = () => {
-  const catalogItems: CatalogItem[] = catalogData;
+  const catalogItems: CatalogItem[] = catalogData.filter(item => item.isShown);
 
   if (!catalogItems || catalogItems.length === 0) {
     return null;
@@ -74,8 +75,7 @@ const CatalogCarousel: React.FC = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* Removed CarouselPrevious and CarouselNext for minimalistic design */}
       </Carousel>
     </div>
   );
