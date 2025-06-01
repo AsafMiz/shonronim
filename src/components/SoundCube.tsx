@@ -4,6 +4,8 @@ import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SoundWaveAnimation from './SoundWaveAnimation';
 import ConfirmDialog from './ConfirmDialog';
+import { APP_CONFIG } from '../config/constants';
+
 
 interface Sound {
   id: string;
@@ -96,21 +98,20 @@ const SoundCube: React.FC<SoundCubeProps> = ({
     }
     
     try {
-      const soundUrl = `${window.location.origin}/sounds/${sound.filename}`;
+      const soundUrl = window.location.origin; //`${window.location.origin}/sounds/${sound.filename}`;;
       
       if (navigator.share) {
         // Use native sharing if available
         await navigator.share({
           title: sound.title,
-          text: `🔊 תשמע את הצליל הזה: ${sound.title}`,
+          text: APP_CONFIG.STRINGS.SHARE_SOUND_TEXT + `${sound.title}`,
           url: soundUrl
         });
         console.log('SoundCube: Shared via native share API');
       } else {
         // Fallback to WhatsApp
-        const text = `🔊 תשמע את הצליל הזה: ${sound.title} ${soundUrl}`;
-        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-        console.log('SoundCube: Opening WhatsApp with URL:', url);
+        const url = window.location.origin;
+        console.log('SoundLibrary: Opening URL:', url);
         window.open(url, '_blank');
       }
     } catch (error) {

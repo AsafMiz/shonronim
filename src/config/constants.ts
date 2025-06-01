@@ -16,8 +16,8 @@ export const APP_CONFIG = {
     NO_EMPTY_CUBES: 'אין קוביות פנויות בלוח הצלילים',
     SHARE_BUTTON: 'שתף',
     SUPPORT_CREATOR: '❤️ תמכו ביוצר',
-    SHARE_SOUND_TEXT: '🔊 תשמע את הצליל הזה: ',
-    SHARE_APP_TEXT: '🔊 בואו תשמעו את לוח הצלילים הכי מגניב!',
+    SHARE_SOUND_TEXT: '🔊 ',
+    SHARE_APP_TEXT: '🔊 טייכנולוגיה',
     
     // Tab names
     TAB_LIBRARY: 'ספריית צלילים',

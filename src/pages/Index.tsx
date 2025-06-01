@@ -50,9 +50,7 @@ const Index = () => {
       if (navigator.share) {
         await navigator.share(shareData);
       } else {
-        // Fallback to WhatsApp
-        const text = `${shareData.text} ${shareData.url}`;
-        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        const url = window.location.origin;
         window.open(url, '_blank');
       }
     } catch (error) {
