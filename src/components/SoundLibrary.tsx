@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import soundsData from '../assets/sounds.json';
 import categoriesData from '../assets/categories.json';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { APP_CONFIG } from '../config/constants';
 
 interface Sound {
   id: string;
@@ -33,8 +33,14 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
-  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>('soundboard', new Array(6).fill(null));
-  const [globalVolume] = useLocalStorage<number>('globalVolume', 70);
+  const [soundboardSounds] = useLocalStorage<(Sound | null)[]>(
+    APP_CONFIG.STORAGE_KEYS.SOUNDBOARD, 
+    new Array(APP_CONFIG.SOUNDBOARD_CUBES_COUNT).fill(null)
+  );
+  const [globalVolume] = useLocalStorage<number>(
+    APP_CONFIG.STORAGE_KEYS.GLOBAL_VOLUME, 
+    APP_CONFIG.DEFAULT_GLOBAL_VOLUME
+  );
 
   const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
@@ -47,7 +53,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   // Function to get category color by category ID
   const getCategoryColor = (categoryId: string): string => {
     const category = getCategoryById(categoryId);
-    return category ? category.color : 'bg-gray-300';
+    return category ? category.color : APP_CONFIG.DEFAULT_CUBE_COLOR;
   };
 
   // Function to get category name by category ID
@@ -161,13 +167,13 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
   return (
     <div className="p-4 max-w-4xl mx-auto" dir="rtl">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-right">ספריית צלילים</h2>
+        <h2 className="text-2xl font-bold mb-4 text-right">{APP_CONFIG.STRINGS.SOUND_LIBRARY_TITLE}</h2>
 
         {/* Search */}
         <div className="mb-4">
           <Input
             type="text"
-            placeholder="חיפוש צלילים..."
+            placeholder={APP_CONFIG.STRINGS.SEARCH_PLACEHOLDER}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="text-right"
@@ -181,8 +187,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
             variant={selectedCategory === '' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setSelectedCategory('')}
+            className={selectedCategory === '' ? 'bg-blue-600 text-white' : ''}
           >
-            הכל
+            {APP_CONFIG.STRINGS.ALL_CATEGORIES}
           </Button>
           {categories.map(category => (
             <Button
@@ -190,10 +197,10 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
               variant="outline"
               size="sm"
               onClick={() => setSelectedCategory(category.id)}
-              className={`${
+              className={`${category.color} text-white border-transparent hover:opacity-80 ${
                 selectedCategory === category.id 
-                  ? `${category.color} text-white border-transparent hover:opacity-90` 
-                  : `${category.color} text-white hover:opacity-80`
+                  ? 'ring-2 ring-blue-500 ring-offset-2 opacity-90' 
+                  : ''
               }`}
             >
               {category.name}
@@ -203,7 +210,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
       </div>
 
       {/* Sound grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
         {filteredSounds.map(sound => {
           const isOnSoundboard = isSoundOnSoundboard(sound.id);
 
@@ -269,7 +276,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard }) => {
 
       {filteredSounds.length === 0 && (
         <div className="text-center py-8 text-gray-500">
-          לא נמצאו צלילים התואמים לחיפוש
+          {APP_CONFIG.STRINGS.NO_SOUNDS_FOUND}
         </div>
       )}
     </div>
