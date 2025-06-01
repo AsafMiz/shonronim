@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -64,7 +63,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" dir="rtl">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-20">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
@@ -91,35 +90,32 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Sticky Tabs */}
-      <div className="bg-white shadow-sm border-b sticky top-[81px] z-10">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="h-12 w-full bg-transparent p-0 max-w-6xl mx-auto">
-            <TabsTrigger 
-              value="library" 
-              className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
-            >
-              {APP_CONFIG.STRINGS.TAB_LIBRARY}
-            </TabsTrigger>
-            <TabsTrigger 
-              value="soundboard" 
-              className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
-            >
-              {APP_CONFIG.STRINGS.TAB_SOUNDBOARD}
-            </TabsTrigger>
-            <TabsTrigger 
-              value="creator" 
-              className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
-            >
-              {APP_CONFIG.STRINGS.TAB_CREATOR}
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
-      </div>
-
       {/* Main Content */}
       <main className="max-w-6xl mx-auto">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="bg-white shadow-sm border-b">
+            <TabsList className="h-12 w-full bg-transparent p-0">
+              <TabsTrigger 
+                value="library" 
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
+              >
+                {APP_CONFIG.STRINGS.TAB_LIBRARY}
+              </TabsTrigger>
+              <TabsTrigger 
+                value="soundboard" 
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
+              >
+                {APP_CONFIG.STRINGS.TAB_SOUNDBOARD}
+              </TabsTrigger>
+              <TabsTrigger 
+                value="creator" 
+                className="flex-1 h-full rounded-none data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 font-medium text-sm"
+              >
+                {APP_CONFIG.STRINGS.TAB_CREATOR}
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
           <TabsContent value="soundboard" className="mt-0">
             <Soundboard />
           </TabsContent>

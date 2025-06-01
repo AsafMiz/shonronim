@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -195,10 +194,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
             variant={selectedCategory === '' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setSelectedCategory('')}
-            className={`${selectedCategory === '' 
-              ? 'bg-blue-600 text-white hover:bg-blue-700' 
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-            }`}
+            className={selectedCategory === '' ? 'bg-blue-600 text-white' : ''}
           >
             {APP_CONFIG.STRINGS.ALL_CATEGORIES}
           </Button>
@@ -208,10 +204,10 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
               variant="outline"
               size="sm"
               onClick={() => setSelectedCategory(category.id)}
-              className={`text-white border-transparent hover:opacity-80 ${category.color} ${
+              className={`${category.color} text-white border-transparent hover:opacity-80 ${
                 selectedCategory === category.id 
-                  ? 'ring-2 ring-blue-500 ring-offset-2 scale-105 shadow-lg' 
-                  : 'hover:scale-105'
+                  ? 'ring-2 ring-blue-500 ring-offset-2 opacity-90' 
+                  : ''
               }`}
             >
               {category.name}
@@ -225,7 +221,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         {filteredSounds.map(sound => {
           const isOnSoundboard = isSoundOnSoundboard(sound.id);
           const availableCubes = hasAvailableCubes();
-          const categoryColor = getCategoryColor(sound.category);
 
           return (
             <div
@@ -269,7 +264,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
 
               <div className="mb-2">
                 <span 
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${categoryColor}`}
+                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
                 >
                   {getCategoryName(sound.category)}
                 </span>
