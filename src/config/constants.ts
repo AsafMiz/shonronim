@@ -22,7 +22,7 @@ export const APP_CONFIG = {
     // Tab names
     TAB_LIBRARY: 'ספריית צלילים',
     TAB_SOUNDBOARD: 'לוח הצלילים',
-    TAB_CREATOR: 'על היוצר'
+    TAB_CREATOR: 'תותח הפרסים'
   },
   
   // Default values
@@ -38,7 +38,7 @@ export const APP_CONFIG = {
   
   // Local storage keys
   STORAGE_KEYS: {
-    SOUNDBOARD: 'soundboard1111111111111',
+    SOUNDBOARD: 'soundboardV0',
     INITIALIZED: 'soundboard_initialized',
     GLOBAL_VOLUME: 'globalVolume'
   }

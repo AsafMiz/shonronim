@@ -24,7 +24,6 @@ interface Category {
 }
 
 const Soundboard: React.FC = () => {
-  console.log('Soundboard rendered');
   
   const [soundboardSounds, setSoundboardSounds] = useLocalStorage<(Sound | null)[]>(
     APP_CONFIG.STORAGE_KEYS.SOUNDBOARD, 
@@ -36,23 +35,17 @@ const Soundboard: React.FC = () => {
 
   const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
-  console.log('Soundboard sounds loaded:', sounds);
 
   // Function to get category color by category ID
   const getCategoryColor = (categoryId: string): string => {
     const category = categories.find(cat => cat.id === categoryId);
-    console.log('category');
-    console.log(category);
     const color = category ? category.color : APP_CONFIG.DEFAULT_CUBE_COLOR 
-    console.log(color);
     return color;
   };
 
   // Initialize with random sounds on first visit - but allow all empty cubes
   useEffect(() => {
-    console.log('Soundboard: useEffect: checking first visit');
     const hasBeenInitialized = localStorage.getItem(APP_CONFIG.STORAGE_KEYS.INITIALIZED);
-    console.log('Soundboard: Has been initialized:', hasBeenInitialized);
     
     if (!hasBeenInitialized) {
       try {
@@ -64,7 +57,6 @@ const Soundboard: React.FC = () => {
           initialSounds[i] = shuffledSounds[i];
         }
         
-        console.log('Soundboard: Setting initial sounds:', initialSounds);
         setSoundboardSounds(initialSounds);
         localStorage.setItem(APP_CONFIG.STORAGE_KEYS.INITIALIZED, 'true');
       } catch (error) {
@@ -74,7 +66,6 @@ const Soundboard: React.FC = () => {
   }, [sounds, setSoundboardSounds]);
 
   const handleAddSound = (cubeIndex: number) => {
-    console.log('Soundboard handleAddSound called', { cubeIndex });
     try {
       setTargetCubeIndex(cubeIndex);
       setShowLibrary(true);
@@ -84,7 +75,6 @@ const Soundboard: React.FC = () => {
   };
 
   const handleRemoveSound = (cubeIndex: number) => {
-    console.log('Soundboard handleRemoveSound called', { cubeIndex });
     try {
       const newSounds = [...soundboardSounds];
       newSounds[cubeIndex] = null;
@@ -97,7 +87,6 @@ const Soundboard: React.FC = () => {
   };
 
   const handleAddToSoundboard = (sound: Sound): boolean => {
-    console.log('Soundboard handleAddToSoundboard called', { sound, targetCubeIndex });
     
     try {
       if (targetCubeIndex !== null) {
@@ -108,7 +97,7 @@ const Soundboard: React.FC = () => {
         setTargetCubeIndex(null);
         // Force a re-render to update the cube color immediately
         forceUpdate({});
-        console.log('Soundboard: Added sound to specific cube:', targetCubeIndex);
+        // console.log('Soundboard: Added sound to specific cube:', targetCubeIndex);
         return true;
       }
 
@@ -120,7 +109,7 @@ const Soundboard: React.FC = () => {
         setSoundboardSounds(newSounds);
         // Force a re-render to update the cube color immediately
         forceUpdate({});
-        console.log('Soundboard: Added sound to first empty cube:', emptyIndex);
+        // console.log('Soundboard: Added sound to first empty cube:', emptyIndex);
         return true;
       }
 

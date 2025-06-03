@@ -129,7 +129,6 @@ const SoundCube: React.FC<SoundCubeProps> = ({
   };
 
   const confirmRemove = () => {
-    console.log('SoundCube confirmRemove called');
     try {
       // Stop audio if playing
       if (audioRef.current) {

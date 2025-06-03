@@ -72,9 +72,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   }).sort((a, b) => a.title.localeCompare(b.title, 'he'));
 
   const isSoundOnSoundboard = (soundId: string): boolean => {
-    console.log('SoundLibrary: isSoundOnSoundboard called', { soundId });
     const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
-    console.log('SoundLibrary: isSoundOnSoundboard result:', result);
     return result;
   };
 
@@ -83,11 +81,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   };
 
   const handlePlay = (soundId: string, filename: string) => {
-    console.log('SoundLibrary handlePlay called', { soundId, filename, globalVolume });
 
     try {
       if (playingSound === soundId) {
-        console.log('SoundLibrary: Stopping currently playing sound');
         setPlayingSound(null);
       } else {
         setPlayingSound(soundId);
@@ -95,7 +91,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         // Create and play audio with proper path and volume
         const soundsDirPath = "sounds/";
         const audioPath = soundsDirPath + filename;
-        console.log('SoundLibrary: Creating audio with path:', audioPath);
         const audio = new Audio(audioPath);
 
         // Set volume based on global volume
@@ -103,7 +98,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
 
         audio.play()
           .then(() => {
-            console.log('SoundLibrary: Audio started playing successfully');
           })
           .catch((error) => {
             console.error('SoundLibrary: Error playing audio:', error);
@@ -127,7 +121,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   };
 
   const handleShare = async (sound: Sound) => {
-    console.log('SoundLibrary handleShare called', { sound });
     try {
       const soundUrl = window.location.origin; //`${window.location.origin}/sounds/${sound.filename}`;
       
@@ -138,10 +131,8 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
           text: APP_CONFIG.STRINGS.SHARE_SOUND_TEXT + `${sound.title}`,
           url: soundUrl
         });
-        console.log('SoundLibrary: Shared via native share API');
       } else {
         const url = window.location.origin;
-        console.log('SoundLibrary: Opening URL:', url);
         window.open(url, '_blank');
       }
     } catch (error) {
@@ -150,7 +141,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   };
 
   const handleAddToSoundboard = (sound: Sound) => {
-    console.log('SoundLibrary handleAddToSoundboard called', { sound });
     try {
       if (!hasAvailableCubes()) {
         console.log('SoundLibrary: No empty cubes available');
@@ -163,7 +153,6 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         console.log('SoundLibrary: Failed to add sound to soundboard');
         alert(APP_CONFIG.STRINGS.NO_EMPTY_CUBES);
       } else {
-        console.log('SoundLibrary: Successfully added sound to soundboard');
       }
     } catch (error) {
       console.error('SoundLibrary: Exception in handleAddToSoundboard:', error);
