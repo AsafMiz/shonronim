@@ -20,13 +20,13 @@ const CreatorPage: React.FC = () => {
               <Instagram className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-800">עמוד האינסטגרם</h2>
+              <h2 className="text-xl font-bold text-gray-800"> האינסטגרם של שון ורון</h2>
               <p className="text-gray-600">@taichovitz</p>
             </div>
           </div>
           
           <p className="text-gray-700 mb-4">
-            עקבו אחרי היוצר באינסטגרם לעוד תוכן מצחיק ומעודכן!
+            מחפשים את שאלת הסקר או את לחיצת היד הרשמית של הכת?
           </p>
           
           <Button 
@@ -44,20 +44,16 @@ const CreatorPage: React.FC = () => {
 
         {/* About the Creator Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">אודות היוצר</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">רוצים עוד קטעים?</h3>
           
           <div className="space-y-4 text-gray-700">
             <p>
-              ברוכים הבאים ללוח הצלילים של שונרונים! 🎵
+              ברוכים הבאים ללוח הצלילים של כת השונרונים! 🎵
             </p>
-            
-            <p>
-              האפליקציה הזו נוצרה כדי להביא לכם את הציטוטים והצלילים הכי מצחיקים 
-              מהעולם הישראלי באופן נגיש ומהנה.
-            </p>
-            
             <p>
               כל הצלילים נאספו בקפידה ועובדו במיוחד עבור החוויה הטובה ביותר שלכם.
+            </p>
+            <p>
               תהנו מהשימוש ואל תשכחו לשתף עם חברים! 😄
             </p>
             
@@ -66,7 +62,7 @@ const CreatorPage: React.FC = () => {
                 💡 רעיון לשיפור? הצעה לצליל חדש?
               </p>
               <p className="text-blue-700 mt-1">
-                פנו אלינו באינסטגרם ונשמח לשמוע מכם!
+                פנו אלי דרך הכפתור "תמכו ביוצר"
               </p>
             </div>
           </div>
