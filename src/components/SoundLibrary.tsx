@@ -186,7 +186,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
           >
             {APP_CONFIG.STRINGS.ALL_CATEGORIES}
           </Button>
-          {categories.map(category => (
+          {categories
+            .sort((a, b) => a.name.localeCompare(b.name, 'he'))
+            .map(category => (
             <Button
               key={category.id}
               variant="outline"

@@ -144,13 +144,13 @@ const Soundboard: React.FC = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-120px)] flex flex-col" dir="rtl">
+    <div className="h-[calc(100vh-160px)] flex flex-col" dir="rtl">
       <div className="p-2 sm:p-4 text-center">
         <p className="text-sm text-gray-600">{APP_CONFIG.STRINGS.SOUNDBOARD_INSTRUCTIONS}</p>
       </div>
 
-      <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4">
-        <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-2 sm:gap-4 h-full max-w-4xl mx-auto`}>
+      <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4 overflow-hidden">
+        <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-1 sm:gap-4 h-full max-w-4xl mx-auto`}>
           {soundboardSounds.map((sound, index) => (
             <SoundCube
               key={`${index}-${sound?.id || 'empty'}`}

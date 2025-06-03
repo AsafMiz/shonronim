@@ -61,7 +61,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" dir="rtl">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-10">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
@@ -91,7 +91,7 @@ const Index = () => {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="bg-white shadow-sm border-b">
+          <div className="bg-white shadow-sm border-b sticky top-[73px] z-10">
             <TabsList className="h-12 w-full bg-transparent p-0">
               <TabsTrigger 
                 value="library" 
