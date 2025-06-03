@@ -193,7 +193,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
             variant={selectedCategory === '' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setSelectedCategory('')}
-            className={selectedCategory === '' ? 'bg-blue-600 text-white' : ''}
+            className={selectedCategory === '' ? '#fff text-white' : ''}
           >
             {APP_CONFIG.STRINGS.ALL_CATEGORIES}
           </Button>

@@ -6,7 +6,7 @@ export const APP_CONFIG = {
   
   // UI strings
   STRINGS: {
-    APP_TITLE: '🔊 כת שונרונים',
+    APP_TITLE: '🔊 כת השונרונים',
     SOUNDBOARD_INSTRUCTIONS: 'לחץ על הקוביות לנגן צלילים או הוסף חדשים',
     BACK_TO_SOUNDBOARD: '← חזרה ללוח הצלילים',
     SOUND_LIBRARY_TITLE: 'ספריית צלילים',
@@ -38,7 +38,7 @@ export const APP_CONFIG = {
   
   // Local storage keys
   STORAGE_KEYS: {
-    SOUNDBOARD: 'soundboard1',
+    SOUNDBOARD: 'soundboard1111111111111',
     INITIALIZED: 'soundboard_initialized',
     GLOBAL_VOLUME: 'globalVolume'
   }
