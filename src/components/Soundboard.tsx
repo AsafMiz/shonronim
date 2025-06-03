@@ -144,7 +144,7 @@ const Soundboard: React.FC = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-250px)] flex flex-col" dir="rtl">
+    <div className="h-[calc(70vh)] flex flex-col" dir="rtl">
       <div className="p-2 sm:p-4 text-center">
         <p className="text-sm text-gray-600">{APP_CONFIG.STRINGS.SOUNDBOARD_INSTRUCTIONS}</p>
       </div>
