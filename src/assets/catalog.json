@@ -4,7 +4,7 @@
     "id": "1",
     "title": "המדריך ללחיצת היד של הכת",
     "description": "צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
-    "image_url": "public/images/3.png",
+    "image_url": "images/3.png",
     "button_title": "לצפייה",
     "link": "https://www.youtube.com/shorts/Ly0YWCYZqik",
     "isShown": true
@@ -13,7 +13,7 @@
     "id": "2",
     "title": "שון ורון 2",
     "description": "שון ורון 2",
-    "image_url": "public/images/2.png",
+    "image_url": "images/2.png",
     "button_title": "2לפרטים נוספים",
     "link": "https://example.com/course1",
     "isShown": false
@@ -22,7 +22,7 @@
     "id": "3",
     "title": "המדריך ללחיצת היד של הכת",
     "description": "צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
-    "image_url": "public/images/1.png",
+    "image_url": "images/1.png",
     "button_title": "לצפייה",
     "link": "https://www.youtube.com/shorts/Ly0YWCYZqik",
     "isShown": false
@@ -31,7 +31,7 @@
     "id": "4",
     "title": "שון ורון 4",
     "description": "שון ורון 4",
-    "image_url": "public/images/4.png",
+    "image_url": "images/4.png",
     "button_title": "4לפרטים נוספים",
     "link": "https://example.com/course1",
     "isShown": false

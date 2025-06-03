@@ -26,7 +26,7 @@ const CreatorPage: React.FC = () => {
           </div>
           
           <p className="text-gray-700 mb-4">
-            מחפשים את שאלת הסקר או את לחיצת היד הרשמית של הכת?
+            מחפשים את שאלת הסקר? רוצים לשלוח עסקים לפליקס?
           </p>
           
           <Button 
