@@ -163,8 +163,6 @@ const Soundboard: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <div className="h-3 sm:h-6 md:h-10" />
     </div>
   );
 };
