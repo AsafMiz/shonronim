@@ -144,7 +144,7 @@ const Soundboard: React.FC = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-120px)] flex flex-col" dir="rtl">
+    <div className="h-[calc(100vh-160px)] flex flex-col" dir="rtl">
       <div className="p-2 sm:p-4 text-center">
         <p className="text-sm text-gray-600">{APP_CONFIG.STRINGS.SOUNDBOARD_INSTRUCTIONS}</p>
       </div>
@@ -163,6 +163,8 @@ const Soundboard: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <div className="h-3 sm:h-6 md:h-10" />
     </div>
   );
 };
