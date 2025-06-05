@@ -36,7 +36,7 @@ const Index = () => {
   };
 
   const handleSupportCreator = () => {
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley', '_blank');
+    window.open('https://buymeacoffee.com/shonronim', '_blank');
   };
 
   const handleShareApp = async () => {
