@@ -96,28 +96,35 @@ const SoundCube: React.FC<SoundCubeProps> = ({
       console.log('SoundCube: No sound to share');
       return;
     }
-    
+  
     try {
-      const soundUrl = window.location.origin; //`${window.location.origin}/sounds/${sound.filename}`;;
+      const soundUrl = `${window.location.origin}/sounds/${sound.filename}`;
       
-      if (navigator.share) {
-        // Use native sharing if available
+      // Fetch the sound file
+      const response = await fetch(soundUrl);
+      const blob = await response.blob();
+      
+      // Create a File object
+      const file = new File([blob], sound.filename, { type: blob.type });
+  
+      // Check if sharing files is supported
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: sound.title,
           text: APP_CONFIG.STRINGS.SHARE_SOUND_TEXT + `${sound.title}`,
-          url: soundUrl
+          files: [file]
         });
-        console.log('SoundCube: Shared via native share API');
+        console.log('SoundCube: Shared file via native share API');
       } else {
-        // Fallback to WhatsApp
-        const url = window.location.origin;
-        console.log('SoundLibrary: Opening URL:', url);
-        window.open(url, '_blank');
+        // Fallback to WhatsApp share link
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(APP_CONFIG.STRINGS.SHARE_SOUND_TEXT + sound.title + ' ' + soundUrl)}`;
+        window.open(whatsappUrl, '_blank');
       }
     } catch (error) {
       console.error('SoundCube: Exception in handleShare:', error);
     }
   };
+  
 
   const handleRemove = () => {
     console.log('SoundCube handleRemove called');
