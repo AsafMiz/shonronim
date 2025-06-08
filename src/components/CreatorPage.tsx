@@ -44,14 +44,17 @@ const CreatorPage: React.FC = () => {
 
         {/* About the Creator Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">רוצים עוד קטעים?</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-4">קודם כל לבריאות!</h3>
           
           <div className="space-y-4 text-gray-700">
             <p>
-              ברוכים הבאים ללוח הצלילים של כת השונרונים! 🎵
+              ברוכים הבאים לאפליקציה של כת השונרונים 🎵
             </p>
             <p>
-              כל הצלילים נאספו בקפידה ועובדו במיוחד עבור החוויה הטובה ביותר שלכם.
+             כל הקרדיט והתודה האמיתית היא לצוות התוכנית ״טייכר וזרחוביץ׳״!
+            </p>
+            <p>
+              האפליקציה נוצרה ע״י חברי כת השונרונים במטרה לאפשר לקהילה להטריל בכל זמן ובכל מקום.
             </p>
             <p>
               תהנו מהשימוש ואל תשכחו לשתף עם חברים! 😄
