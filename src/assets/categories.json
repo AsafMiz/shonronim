@@ -1,45 +1,57 @@
 
 [
   {
-    "id": "1",
+    "id": "brano",
     "name": "ברהנו טגניה",
     "color": "bg-red-400",
     "isShown": true
   },
   {
-    "id": "2", 
+    "id": "peres", 
     "name": "שמעון פרס",
     "color": "bg-green-400",
     "isShown": true
   },
   {
-    "id": "3",
+    "id": "berko",
     "name": "ברקו", 
     "color": "bg-blue-400",
     "isShown": true
   },
   {
-    "id": "4",
+    "id": "jamil",
     "name": "ג׳אמיל חפוז",
     "color": "bg-orange-400",
     "isShown": true
   },
   {
-    "id": "5",
+    "id": "dorit",
     "name": "דורית",
     "color": "bg-cyan-400",
     "isShown": true
   },
   {
-    "id": "6",
+    "id": "shon",
     "name": "שון",
     "color": "bg-yellow-400",
     "isShown": true
   },
   {
-    "id": "7",
+    "id": "sheftel",
     "name": "יורם שפטל",
     "color": "bg-pink-400",
+    "isShown": true
+  },
+  {
+    "id": "gamliel",
+    "name": "גמליאל",
+    "color": "bg-purple-400",
+    "isShown": true
+  },
+  {
+    "id": "netali",
+    "name": "נטע-לי השכן",
+    "color": "bg-rose-400",
     "isShown": true
   }
 ]

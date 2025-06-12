@@ -9,14 +9,29 @@ export default {
 		"./src/**/*.{ts,tsx}",
 	],
 	safelist: [
-		'bg-red-400',
-		'bg-green-400',
-		'bg-blue-400',
-		'bg-orange-400',
-		'bg-cyan-400',
-		'bg-yellow-400',
-		'bg-pink-400'
-	  ],
+		'bg-red-400',  // used
+		'bg-green-400',  // used
+		'bg-blue-400',  // used
+		'bg-orange-400',  // used
+		'bg-cyan-400',  // used
+		'bg-yellow-400',  // used
+		'bg-pink-400',  // used
+		'bg-purple-400',  // used
+		'bg-rose-400',
+		'bg-lime-400',
+		'bg-emerald-400',
+		'bg-teal-400',
+		'bg-indigo-400',
+		'bg-fuchsia-400',
+		'bg-violet-400',
+		'bg-sky-400',
+		'bg-amber-400',
+		'bg-neutral-400',
+		'bg-stone-400',
+		'bg-zinc-400',
+		'bg-slate-400'
+	  ]
+	  ,
 	prefix: "",
 	theme: {
 		container: {

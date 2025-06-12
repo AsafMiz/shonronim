@@ -3,113 +3,185 @@
   {
     "id": "1",
     "title": "כחול הנראה",
-    "filename": "ככל_הנראה.m4a",
+    "filename": "brano/ככל_הנראה.m4a",
     "tags": ["כחול הנראה", "ברהנו"],
     "hidden_tags": ["ככל הנראה", "ברנו"],
-    "category": "1"
+    "category": "brano"
   },
   {
     "id": "2",
     "title": "אפשר להשתגע",
-    "filename": "אפשר_להשתגע.m4a",
+    "filename": "peres/אפשר_להשתגע.m4a",
     "tags": ["פרס", "הולוגרמה"],
     "hidden_tags": ["ההולוגרמה של שמעון פרס"],
-    "category": "2"
+    "category": "peres"
   },
   {
     "id": "3",
     "title": "לוינסון אתה עשר",
-    "filename": "אתה_עשר.m4a",
+    "filename": "berko/אתה_עשר.m4a",
     "tags": ["עשר", "ברקו"],
     "hidden_tags": ["אייל ברקוביץ׳"],
-    "category": "3"
+    "category": "berko"
   },
   {
     "id": "4",
     "title": "בהול",
-    "filename": "בהול.m4a",
+    "filename": "jamil/בהול.m4a",
     "tags": ["למחר", "דחוף"],
     "hidden_tags": ["מלהק החיות"],
-    "category": "4"
+    "category": "jamil"
   },
   {
     "id": "5",
     "title": "חייבת לקחת ת׳ביילנדוס",
-    "filename": "ביילנדוס.m4a",
+    "filename": "dorit/ביילנדוס.m4a",
     "tags": ["עגבות", "מושב"],
     "hidden_tags": ["תותח הפרסים"],
-    "category": "5"
+    "category": "dorit"
   },
   {
     "id": "6",
     "title": "וידאו",
-    "filename": "וידאו.m4a",
+    "filename": "shon/וידאו.m4a",
     "tags": ["שון"],
     "hidden_tags": ["שרון טייכר"],
-    "category": "6"
+    "category": "shon"
   },
   {
     "id": "7",
     "title": "חדשנות",
-    "filename": "חדשנות.m4a",
+    "filename": "peres/חדשנות.m4a",
     "tags": ["פרס", "הולוגרמה"],
     "hidden_tags": ["ההולוגרמה של שמעון פרס"],
-    "category": "2"
+    "category": "peres"
   },
   {
     "id": "8",
     "title": "טייפקאסט מרסל מרסו",
-    "filename": "טייפקאסט.m4a",
+    "filename": "jamil/טייפקאסט.m4a",
     "tags": ["למחר", "דחוף"],
     "hidden_tags": ["מלהק החיות"],
-    "category": "4"
+    "category": "jamil"
   },
   {
     "id": "9",
     "title": "טייכנולוגיה",
-    "filename": "טכנולוגיה.m4a",
+    "filename": "peres/טכנולוגיה.m4a",
     "tags": ["פרס", "הולוגרמה"],
     "hidden_tags": ["טכנולוגיה", "ההולוגרמה של שמעון פרס"],
-    "category": "2"
+    "category": "peres"
   },
   {
     "id": "10",
     "title": "כוס תוך הראש",
-    "filename": "כוס_תוך_הראש.m4a",
+    "filename": "brano/כוס_תוך_הראש.m4a",
     "tags": ["תוך הראש", "ברהנו"],
     "hidden_tags": ["לתוך", "ברנו"],
-    "category": "1"
+    "category": "brano"
   },
   {
     "id": "11",
     "title": "מי עשה לוג אוף?",
-    "filename": "לוג_אוף.m4a",
+    "filename": "shon/לוג_אוף.m4a",
     "tags": ["שון"],
     "hidden_tags": ["שרון טייכר"],
-    "category": "6"
+    "category": "shon"
   },
   {
     "id": "12",
     "title": "ללכת בננות",
-    "filename": "ללכת_בננות.m4a",
+    "filename": "peres/ללכת_בננות.m4a",
     "tags": ["פרס", "הולוגרמה"],
     "hidden_tags": ["טכנולוגיה", "ההולוגרמה של שמעון פרס"],
-    "category": "2"
+    "category": "peres"
   },
   {
     "id": "13",
     "title": "מי אומר לי שלום?",
-    "filename": "מי_אומר_לי_שלום.m4a",
+    "filename": "sheftel/מי_אומר_לי_שלום.m4a",
     "tags": ["שפטל"],
     "hidden_tags": ["יהורם", "כל כך יפה?"],
-    "category": "7"
+    "category": "sheftel"
   },
   {
     "id": "14",
     "title": "סגול הנראה",
-    "filename": "סגול_הנראה.m4a",
+    "filename": "brano/סגול_הנראה.m4a",
     "tags": ["כחול הנראה", "ברהנו"],
     "hidden_tags": ["סגול", "ככל", "ירוק", "ורוד"],
-    "category": "1"
+    "category": "brano"
+  },
+  {
+    "id": "15",
+    "title": "אבללל",
+    "filename": "gamliel/אבללל.mp3",
+    "tags": ["חיפוש עבודה", "אבל"],
+    "hidden_tags": ["גמליאל"],
+    "category": "gamliel"
+  },
+  {
+    "id": "16",
+    "title": "אום כולתום",
+    "filename": "netali/אום_כולתום.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "17",
+    "title": "איש כוחות הביטחון",
+    "filename": "netali/איש_כוחות_הביטחון.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "18",
+    "title": "מפוצלת",
+    "filename": "netali/מפוצלת.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "19",
+    "title": "נובח בלי לנשוך",
+    "filename": "netali/נובח בלי לנשוך.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "20",
+    "title": "עבודה קלין",
+    "filename": "netali/עבודה_קלין.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "21",
+    "title": "ת׳לא מתבייש?",
+    "filename": "netali/לא_מתבייש.mp3",
+    "tags": ["השכן", "מהמפוצלת"],
+    "hidden_tags": ["תקשיב"],
+    "category": "netali"
+  },
+  {
+    "id": "22",
+    "title": "תקשיב",
+    "filename": "netali/תקשיב.mp3",
+    "tags": ["תקשיב", "תקשיב"],
+    "hidden_tags": ["תקשיב", "השכן", "מהמפוצלת"],
+    "category": "netali"
+  },
+  {
+    "id": "23",
+    "title": "עשר",
+    "filename": "berko/עשר.m4a",
+    "tags": ["עשר", "ברקו"],
+    "hidden_tags": ["אייל ברקוביץ׳"],
+    "category": "berko"
   }
 ]
