@@ -53,5 +53,17 @@
     "name": "נטע-לי השכן",
     "color": "bg-rose-400",
     "isShown": true
+  },
+  {
+    "id": "otot",
+    "name": "אותות",
+    "color": "bg-emerald-400",
+    "isShown": true
+  },
+  {
+    "id": "jerry",
+    "name": "ג׳רי פנדלבאום",
+    "color": "bg-indigo-400",
+    "isShown": true
   }
 ]

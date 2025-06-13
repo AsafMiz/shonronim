@@ -96,6 +96,13 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         // Set volume based on global volume
         audio.volume = globalVolume / 100;
 
+        // Demo: stop playing after 60 seconds
+        // setTimeout(() => {
+        //   setPlayingSound(null);
+        //   if (audio) {
+        //     audio.pause();
+        //   }
+        // }, 60000);
         audio.play()
           .then(() => {
           })

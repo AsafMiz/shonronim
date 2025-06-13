@@ -17,11 +17,11 @@ export default {
 		'bg-yellow-400',  // used
 		'bg-pink-400',  // used
 		'bg-purple-400',  // used
-		'bg-rose-400',
+		'bg-rose-400',  // used
 		'bg-lime-400',
-		'bg-emerald-400',
+		'bg-emerald-400',  // used
 		'bg-teal-400',
-		'bg-indigo-400',
+		'bg-indigo-400',  // used
 		'bg-fuchsia-400',
 		'bg-violet-400',
 		'bg-sky-400',

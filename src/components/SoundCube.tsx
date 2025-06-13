@@ -44,13 +44,14 @@ const SoundCube: React.FC<SoundCubeProps> = ({
     }
 
     try {
-      // If currently playing, restart the sound
+      // If currently playing, stop the sound
       if (audioRef.current) {
         console.log('SoundCube: Stopping and restarting audio');
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
         audioRef.current = null;
         setIsPlaying(false);
+        return;
       }
 
       // Create new audio element

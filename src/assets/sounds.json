@@ -183,5 +183,29 @@
     "tags": ["עשר", "ברקו"],
     "hidden_tags": ["אייל ברקוביץ׳"],
     "category": "berko"
+  },
+  {
+    "id": "24",
+    "title": "פותחים פה לשטן",
+    "filename": "otot/פה_לשטן.mp3",
+    "tags": ["טנצ", "אות"],
+    "hidden_tags": ["ואתם יודעים את זה"],
+    "category": "otot"
+  },
+  {
+    "id": "25",
+    "title": "טרק ניין",
+    "filename": "jerry/track_9.mp3",
+    "tags": ["טרק 9", "שאני ביקשתי"],
+    "hidden_tags": ["משפטי זן"],
+    "category": "jerry"
+  },
+  {
+    "id": "27",
+    "title": "אצבעות על הדפקים",
+    "filename": "otot/דפקים.mp3",
+    "tags": ["טנצ", "אות"],
+    "hidden_tags": ["עם האצבעות על הדפקים", "דופק"],
+    "category": "otot"
   }
 ]
