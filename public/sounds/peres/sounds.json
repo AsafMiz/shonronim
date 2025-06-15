@@ -1,0 +1,30 @@
+[
+  {
+    "title": "אפשר להשתגע",
+    "filename": "peres/אפשר_להשתגע.m4a",
+    "tags": ["פרס", "הולוגרמה"],
+    "hidden_tags": ["ההולוגרמה של שמעון פרס"],
+    "category": "peres"
+  },
+  {
+    "title": "חדשנות",
+    "filename": "peres/חדשנות.m4a",
+    "tags": ["פרס", "הולוגרמה"],
+    "hidden_tags": ["ההולוגרמה של שמעון פרס"],
+    "category": "peres"
+  },
+  {
+    "title": "טייכנולוגיה",
+    "filename": "peres/טכנולוגיה.m4a",
+    "tags": ["פרס", "הולוגרמה"],
+    "hidden_tags": ["טכנולוגיה", "ההולוגרמה של שמעון פרס"],
+    "category": "peres"
+  },
+  {
+    "title": "ללכת בננות",
+    "filename": "peres/ללכת_בננות.m4a",
+    "tags": ["פרס", "הולוגרמה"],
+    "hidden_tags": ["טכנולוגיה", "ההולוגרמה של שמעון פרס"],
+    "category": "peres"
+  }
+] 

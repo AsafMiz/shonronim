@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import soundsData from '../assets/sounds.json';
 import categoriesData from '../assets/categories.json';
 import { APP_CONFIG } from '../config/constants';
+import { loadAllSounds } from '../services/soundsService';
 
 interface Sound {
   title: string;
@@ -29,10 +29,28 @@ const Soundboard: React.FC = () => {
   );
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
+  const [sounds, setSounds] = useState<Sound[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [, forceUpdate] = useState({});
 
-  const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
+
+  // Load sounds on component mount
+  useEffect(() => {
+    const loadSounds = async () => {
+      setIsLoading(true);
+      try {
+        const allSounds = await loadAllSounds();
+        setSounds(allSounds);
+      } catch (error) {
+        console.error('Error loading sounds:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadSounds();
+  }, []);
 
   // Function to get category color by category ID
   const getCategoryColor = (categoryId: string): string => {
@@ -45,7 +63,7 @@ const Soundboard: React.FC = () => {
   useEffect(() => {
     const hasBeenInitialized = localStorage.getItem(APP_CONFIG.STORAGE_KEYS.INITIALIZED);
     
-    if (!hasBeenInitialized) {
+    if (!hasBeenInitialized && sounds.length > 0) {
       try {
         const shuffledSounds = [...sounds].sort(() => Math.random() - 0.5);
         const initialSounds = new Array(APP_CONFIG.SOUNDBOARD_CUBES_COUNT).fill(null);
@@ -147,20 +165,33 @@ const Soundboard: React.FC = () => {
         <p className="text-sm text-gray-600">{APP_CONFIG.STRINGS.SOUNDBOARD_INSTRUCTIONS}</p>
       </div>
 
-      <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4">
-        <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-2 sm:gap-4 h-full max-w-4xl mx-auto`}>
-          {soundboardSounds.map((sound, index) => (
-            <SoundCube
-              key={`${index}-${sound?.title || 'empty'}`}
-              sound={sound}
-              onAddSound={() => handleAddSound(index)}
-              onRemoveSound={() => handleRemoveSound(index)}
-              index={index}
-              cubeColor={sound ? getCategoryColor(sound.category) : APP_CONFIG.DEFAULT_CUBE_COLOR}
-            />
-          ))}
+      {/* Loading state */}
+      {isLoading && (
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <p className="mt-2 text-gray-600">טוען צלילים...</p>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Soundboard grid */}
+      {!isLoading && (
+        <div className="flex-1 px-2 sm:px-4 pb-2 sm:pb-4">
+          <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-2 sm:gap-4 h-full max-w-4xl mx-auto`}>
+            {soundboardSounds.map((sound, index) => (
+              <SoundCube
+                key={`${index}-${sound?.title || 'empty'}`}
+                sound={sound}
+                onAddSound={() => handleAddSound(index)}
+                onRemoveSound={() => handleRemoveSound(index)}
+                index={index}
+                cubeColor={sound ? getCategoryColor(sound.category) : APP_CONFIG.DEFAULT_CUBE_COLOR}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

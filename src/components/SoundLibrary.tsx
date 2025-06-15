@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Share, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import soundsData from '../assets/sounds.json';
-import categoriesData from '../assets/categories.json';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import categoriesData from '../assets/categories.json';
 import { APP_CONFIG } from '../config/constants';
-
+import { loadAllSounds } from '../services/soundsService';
 
 interface Sound {
   title: string;
@@ -34,13 +33,31 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
+  const [sounds, setSounds] = useState<Sound[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [globalVolume] = useLocalStorage<number>(
     APP_CONFIG.STORAGE_KEYS.GLOBAL_VOLUME, 
     APP_CONFIG.DEFAULT_GLOBAL_VOLUME
   );
 
-  const sounds: Sound[] = soundsData;
   const categories: Category[] = categoriesData;
+
+  // Load sounds on component mount
+  useEffect(() => {
+    const loadSounds = async () => {
+      setIsLoading(true);
+      try {
+        const allSounds = await loadAllSounds();
+        setSounds(allSounds);
+      } catch (error) {
+        console.error('Error loading sounds:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadSounds();
+  }, []);
 
   // Function to get category by ID
   const getCategoryById = (categoryId: string): Category | undefined => {
@@ -221,73 +238,85 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         </div>
       </div>
 
-      {/* Sound grid */}
-      <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
-        {filteredSounds.map(sound => {
-          const isOnSoundboard = isSoundOnSoundboard(sound.title);
-          const availableCubes = hasAvailableCubes();
+      {/* Loading state */}
+      {isLoading && (
+        <div className="text-center py-8">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <p className="mt-2 text-gray-600">טוען צלילים...</p>
+        </div>
+      )}
 
-          return (
-            <div
-              key={sound.title}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-gray-800 truncate ml-2">
-                  {sound.title}
-                </h3>
-                <div className="flex gap-1">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="w-8 h-8 p-0"
-                    onClick={() => handlePlay(sound.title, sound.filename)}
+      {/* Sound grid */}
+      {!isLoading && (
+        <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
+          {filteredSounds.map(sound => {
+            const isOnSoundboard = isSoundOnSoundboard(sound.title);
+            const availableCubes = hasAvailableCubes();
+
+            return (
+              <div
+                key={sound.title}
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-semibold text-gray-800 text-right flex-1">{sound.title}</h3>
+                  
+                  <div className="flex gap-2 mr-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="w-8 h-8 p-0"
+                      onClick={() => handlePlay(sound.title, sound.filename)}
+                    >
+                      <Play
+                        className={`w-4 h-4 ${playingSound === sound.title ? 'animate-pulse' : ''}`}
+                        fill={playingSound === sound.title ? 'currentColor' : 'none'}
+                      />
+                    </Button>
+                    
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="w-8 h-8 p-0"
+                      onClick={() => handleShare(sound)}
+                    >
+                      <Share className="w-4 h-4" />
+                    </Button>
+                    
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="w-8 h-8 p-0"
+                      onClick={() => handleAddToSoundboard(sound)}
+                      disabled={isOnSoundboard || !availableCubes}
+                    >
+                      <Plus className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="mb-2">
+                  <span 
+                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
                   >
-                    <Play
-                      className={`w-4 h-4 ${playingSound === sound.title ? 'animate-pulse' : ''}`}
-                      fill={playingSound === sound.title ? 'currentColor' : 'none'}
-                    />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="w-8 h-8 p-0"
-                    onClick={() => handleShare(sound)}
-                  >
-                    <Share className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    className={`w-8 h-8 p-0 ${isOnSoundboard ? 'bg-green-500 hover:bg-green-600' : ''}`}
-                    onClick={() => handleAddToSoundboard(sound)}
-                    disabled={isOnSoundboard || !availableCubes}
-                  >
-                    <Plus className="w-4 h-4" />
-                  </Button>
+                    {getCategoryName(sound.category)}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-1">
+                  {sound.tags.map(tag => (
+                    <Badge key={tag} variant="outline" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
               </div>
+            );
+          })}
+        </div>
+      )}
 
-              <div className="mb-2">
-                <span 
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
-                >
-                  {getCategoryName(sound.category)}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap gap-1">
-                {sound.tags.map(tag => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {filteredSounds.length === 0 && (
+      {!isLoading && filteredSounds.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           {APP_CONFIG.STRINGS.NO_SOUNDS_FOUND}
         </div>
