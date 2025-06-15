@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import catalogData from '../assets/catalog.json';
 import { Button } from '@/components/ui/button';
-import { log } from 'console';
 
 interface CatalogItem {
   id: string;

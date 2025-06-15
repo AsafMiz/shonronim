@@ -48,10 +48,7 @@ const CreatorPage: React.FC = () => {
           
           <div className="space-y-4 text-gray-700">
             <p>
-              ברוכים הבאים לאפליקציה של כת השונרונים 🎵
-            </p>
-            <p>
-             כל הקרדיט והתודה האמיתית היא לצוות התוכנית ״טייכר וזרחוביץ׳״!
+             כל הקרדיט והתודה האמיתית היא לצוות התוכנית <b>טייכר וזרחוביץ׳</b>!
             </p>
             <p>
               האפליקציה נוצרה ע״י חברי כת השונרונים במטרה לאפשר לקהילה להטריל בכל זמן ובכל מקום.
