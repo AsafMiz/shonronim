@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Share, Plus } from 'lucide-react';
+import { Play, Share, Plus, Pause, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -39,6 +39,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
     APP_CONFIG.STORAGE_KEYS.GLOBAL_VOLUME, 
     APP_CONFIG.DEFAULT_GLOBAL_VOLUME
   );
+  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
   // Load sounds and categories on component mount
   useEffect(() => {
@@ -99,11 +100,18 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   };
 
   const handlePlay = (soundId: string, filename: string) => {
-
     try {
+      // Stop any currently playing audio
+      if (currentAudio) {
+        currentAudio.pause();
+        setCurrentAudio(null);
+      }
+
       if (playingSound === soundId) {
+        // If the same sound is clicked, stop it
         setPlayingSound(null);
       } else {
+        // Play the new sound
         setPlayingSound(soundId);
 
         // Create and play audio with proper path and volume
@@ -114,15 +122,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         // Set volume based on global volume
         audio.volume = globalVolume / 100;
 
-        // Demo: stop playing after 60 seconds
-        // setTimeout(() => {
-        //   setPlayingSound(null);
-        //   if (audio) {
-        //     audio.pause();
-        //   }
-        // }, 60000);
         audio.play()
           .then(() => {
+            setCurrentAudio(audio);
           })
           .catch((error) => {
             console.error('SoundLibrary: Error playing audio:', error);
@@ -132,16 +134,19 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         audio.onended = () => {
           console.log('SoundLibrary: Audio playback ended');
           setPlayingSound(null);
+          setCurrentAudio(null);
         };
 
         audio.onerror = (error) => {
           console.error('SoundLibrary: Audio error:', error);
           setPlayingSound(null);
+          setCurrentAudio(null);
         };
       }
     } catch (error) {
       console.error('SoundLibrary: Exception in handlePlay:', error);
       setPlayingSound(null);
+      setCurrentAudio(null);
     }
   };
 
@@ -270,10 +275,11 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
                       className="w-8 h-8 p-0"
                       onClick={() => handlePlay(sound.title, sound.filename)}
                     >
-                      <Play
-                        className={`w-4 h-4 ${playingSound === sound.title ? 'animate-pulse' : ''}`}
-                        fill={playingSound === sound.title ? 'currentColor' : 'none'}
-                      />
+                      {playingSound === sound.title ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4" />
+                      )}
                     </Button>
                     
                     <Button
@@ -292,7 +298,11 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
                       onClick={() => handleAddToSoundboard(sound)}
                       disabled={isOnSoundboard || !availableCubes}
                     >
-                      <Plus className="w-4 h-4" />
+                      {isOnSoundboard ? (
+                        <Check className="w-4 h-4" />
+                      ) : (
+                        <Plus className="w-4 h-4" />
+                      )}
                     </Button>
                   </div>
                 </div>
