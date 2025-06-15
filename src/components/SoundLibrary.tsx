@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Play, Share, Plus, Pause, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -40,6 +40,16 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
     APP_CONFIG.DEFAULT_GLOBAL_VOLUME
   );
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+
+  // Debounce search term to improve performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 150); // 150ms debounce
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   // Load sounds and categories on component mount
   useEffect(() => {
@@ -62,44 +72,58 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
     loadData();
   }, []);
 
+  // Memoize category lookups
+  const categoryMap = useMemo(() => {
+    const map = new Map<string, Category>();
+    categories.forEach(cat => map.set(cat.id, cat));
+    return map;
+  }, [categories]);
+
   // Function to get category by ID
-  const getCategoryById = (categoryId: string): Category | undefined => {
-    return categories.find(cat => cat.id === categoryId);
-  };
+  const getCategoryById = useCallback((categoryId: string): Category | undefined => {
+    return categoryMap.get(categoryId);
+  }, [categoryMap]);
 
   // Function to get category color by category ID
-  const getCategoryColor = (categoryId: string): string => {
+  const getCategoryColor = useCallback((categoryId: string): string => {
     const category = getCategoryById(categoryId);
     return category ? category.color : APP_CONFIG.DEFAULT_CUBE_COLOR;
-  };
+  }, [getCategoryById]);
 
   // Function to get category name by category ID
-  const getCategoryName = (categoryId: string): string => {
+  const getCategoryName = useCallback((categoryId: string): string => {
     const category = getCategoryById(categoryId);
     return category ? category.name : 'אחר';
-  };
+  }, [getCategoryById]);
 
-  const filteredSounds = sounds.filter(sound => {
-    const matchesSearch = searchTerm === '' ||
-      sound.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      sound.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      sound.hidden_tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredSounds = useMemo(() => {
+    const filtered = sounds.filter(sound => {
+      const matchesSearch = debouncedSearchTerm === '' ||
+        sound.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        sound.tags.some(tag => tag.toLowerCase().includes(debouncedSearchTerm.toLowerCase())) ||
+        sound.hidden_tags.some(tag => tag.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
 
-    const matchesCategory = selectedCategory === '' || sound.category === selectedCategory;
+      const matchesCategory = selectedCategory === '' || sound.category === selectedCategory;
 
-    return matchesSearch && matchesCategory;
-  }).sort((a, b) => a.title.localeCompare(b.title, 'he'));
+      return matchesSearch && matchesCategory;
+    }).sort((a, b) => a.title.localeCompare(b.title, 'he'));
+    return filtered;
+  }, [sounds, debouncedSearchTerm, selectedCategory]);
 
-  const isSoundOnSoundboard = (soundId: string): boolean => {
-    const result = soundboardSounds.some(boardSound => boardSound?.title === soundId);
-    return result;
-  };
+  // Memoize soundboard status checks
+  const soundboardSoundTitles = useMemo(() => {
+    return new Set(soundboardSounds.filter(Boolean).map(sound => sound!.title));
+  }, [soundboardSounds]);
 
-  const hasAvailableCubes = (): boolean => {
+  const isSoundOnSoundboard = useCallback((soundId: string): boolean => {
+    return soundboardSoundTitles.has(soundId);
+  }, [soundboardSoundTitles]);
+
+  const hasAvailableCubes = useCallback((): boolean => {
     return soundboardSounds.some(boardSound => boardSound === null);
-  };
+  }, [soundboardSounds]);
 
-  const handlePlay = (soundId: string, filename: string) => {
+  const handlePlay = useCallback((soundId: string, filename: string) => {
     try {
       // Stop any currently playing audio
       if (currentAudio) {
@@ -148,9 +172,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
       setPlayingSound(null);
       setCurrentAudio(null);
     }
-  };
+  }, [currentAudio, playingSound, globalVolume]);
 
-  const handleShare = async (sound: Sound) => {
+  const handleShare = useCallback(async (sound: Sound) => {
     try {
           const soundUrl = `${window.location.origin}/sounds/${sound.filename}`;
           
@@ -177,9 +201,9 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
         } catch (error) {
           console.error('SoundCube: Exception in handleShare:', error);
         }
-  };
+  }, []);
 
-  const handleAddToSoundboard = (sound: Sound) => {
+  const handleAddToSoundboard = useCallback((sound: Sound) => {
     try {
       if (!hasAvailableCubes()) {
         console.log('SoundLibrary: No empty cubes available');
@@ -196,7 +220,85 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
     } catch (error) {
       console.error('SoundLibrary: Exception in handleAddToSoundboard:', error);
     }
-  };
+  }, [hasAvailableCubes, onAddToSoundboard]);
+
+  // Memoize sorted categories
+  const sortedCategories = useMemo(() => {
+    return categories.sort((a, b) => a.name.localeCompare(b.name, 'he'));
+  }, [categories]);
+
+  // Memoized SoundCard component to prevent unnecessary re-renders
+  const SoundCard = useCallback(({ sound }: { sound: Sound }) => {
+    const isOnSoundboard = isSoundOnSoundboard(sound.title);
+    const availableCubes = hasAvailableCubes();
+
+    return (
+      <div className="bg-white rounded-lg shadow-sm border p-3 transform-gpu">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="font-semibold text-gray-800 text-right flex-1 text-sm leading-tight">{sound.title}</h3>
+          
+          <div className="flex gap-1 mr-2">
+            <Button
+              size="sm"
+              variant="outline"
+              className="w-7 h-7 p-0"
+              onClick={() => handlePlay(sound.title, sound.filename)}
+            >
+              {playingSound === sound.title ? (
+                <Pause className="w-3 h-3" />
+              ) : (
+                <Play className="w-3 h-3" />
+              )}
+            </Button>
+            
+            <Button
+              size="sm"
+              variant="outline"
+              className="w-7 h-7 p-0"
+              onClick={() => handleShare(sound)}
+            >
+              <Share className="w-3 h-3" />
+            </Button>
+            
+            <Button
+              size="sm"
+              variant="outline"
+              className="w-7 h-7 p-0"
+              onClick={() => handleAddToSoundboard(sound)}
+              disabled={isOnSoundboard || !availableCubes}
+            >
+              {isOnSoundboard ? (
+                <Check className="w-3 h-3" />
+              ) : (
+                <Plus className="w-3 h-3" />
+              )}
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-2">
+          <span 
+            className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
+          >
+            {getCategoryName(sound.category)}
+          </span>
+        </div>
+
+        <div className="flex flex-wrap gap-1">
+          {sound.tags.slice(0, 3).map(tag => (
+            <Badge key={tag} variant="outline" className="text-xs px-1 py-0">
+              {tag}
+            </Badge>
+          ))}
+          {sound.tags.length > 3 && (
+            <Badge variant="outline" className="text-xs px-1 py-0">
+              +{sound.tags.length - 3}
+            </Badge>
+          )}
+        </div>
+      </div>
+    );
+  }, [playingSound, isSoundOnSoundboard, hasAvailableCubes, handlePlay, handleShare, handleAddToSoundboard, getCategoryColor, getCategoryName]);
 
   return (
     <div className="p-4 max-w-4xl mx-auto" dir="rtl">
@@ -225,9 +327,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
           >
             {APP_CONFIG.STRINGS.ALL_CATEGORIES}
           </Button>
-          {categories
-            .sort((a, b) => a.name.localeCompare(b.name, 'he'))
-            .map(category => (
+          {sortedCategories.map(category => (
             <Button
               key={category.id}
               variant="outline"
@@ -255,76 +355,12 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
 
       {/* Sound grid */}
       {!isLoading && (
-        <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
-          {filteredSounds.map(sound => {
-            const isOnSoundboard = isSoundOnSoundboard(sound.title);
-            const availableCubes = hasAvailableCubes();
-
-            return (
-              <div
-                key={sound.title}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-semibold text-gray-800 text-right flex-1">{sound.title}</h3>
-                  
-                  <div className="flex gap-2 mr-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="w-8 h-8 p-0"
-                      onClick={() => handlePlay(sound.title, sound.filename)}
-                    >
-                      {playingSound === sound.title ? (
-                        <Pause className="w-4 h-4" />
-                      ) : (
-                        <Play className="w-4 h-4" />
-                      )}
-                    </Button>
-                    
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="w-8 h-8 p-0"
-                      onClick={() => handleShare(sound)}
-                    >
-                      <Share className="w-4 h-4" />
-                    </Button>
-                    
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="w-8 h-8 p-0"
-                      onClick={() => handleAddToSoundboard(sound)}
-                      disabled={isOnSoundboard || !availableCubes}
-                    >
-                      {isOnSoundboard ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <Plus className="w-4 h-4" />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="mb-2">
-                  <span 
-                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white ${getCategoryColor(sound.category)}`}
-                  >
-                    {getCategoryName(sound.category)}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap gap-1">
-                  {sound.tags.map(tag => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+        <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-3`} style={{ willChange: 'auto' }}>
+          {filteredSounds.map(sound => (
+            <div key={sound.title} className="transform-gpu">
+              {SoundCard({ sound })}
+            </div>
+          ))}
         </div>
       )}
 

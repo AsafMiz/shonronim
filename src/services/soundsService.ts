@@ -34,27 +34,26 @@ const CATEGORY_DIRECTORIES = [
  * Dynamically loads all categories from individual category.json files
  */
 export const loadAllCategories = async (): Promise<Category[]> => {
-  const allCategories: Category[] = [];
-  
   try {
-    // Load category from each directory
-    for (const categoryDir of CATEGORY_DIRECTORIES) {
+    // Load all categories in parallel for better performance
+    const categoryPromises = CATEGORY_DIRECTORIES.map(async (categoryDir) => {
       try {
         const response = await fetch(`/sounds/${categoryDir}/category.json`);
         if (response.ok) {
           const category: Category = await response.json();
-          if (category.isShown) {
-            allCategories.push(category);
-          }
+          return category.isShown ? category : null;
         } else {
           console.warn(`Failed to load category: ${categoryDir}`);
+          return null;
         }
       } catch (error) {
         console.error(`Error loading category ${categoryDir}:`, error);
+        return null;
       }
-    }
-    
-    return allCategories;
+    });
+
+    const results = await Promise.all(categoryPromises);
+    return results.filter((category): category is Category => category !== null);
   } catch (error) {
     console.error('Error loading categories:', error);
     return [];
@@ -83,25 +82,26 @@ export const loadCategory = async (categoryDir: string): Promise<Category | null
  * Dynamically loads all sounds from individual JSON files in each category directory
  */
 export const loadAllSounds = async (): Promise<Sound[]> => {
-  const allSounds: Sound[] = [];
-  
   try {
-    // Load sounds from each category directory
-    for (const category of CATEGORY_DIRECTORIES) {
+    // Load all sounds in parallel for better performance
+    const soundPromises = CATEGORY_DIRECTORIES.map(async (category) => {
       try {
         const response = await fetch(`/sounds/${category}/sounds.json`);
         if (response.ok) {
           const categorySounds: Sound[] = await response.json();
-          allSounds.push(...categorySounds);
+          return categorySounds;
         } else {
           console.warn(`Failed to load sounds for category: ${category}`);
+          return [];
         }
       } catch (error) {
         console.error(`Error loading sounds for category ${category}:`, error);
+        return [];
       }
-    }
-    
-    return allSounds;
+    });
+
+    const results = await Promise.all(soundPromises);
+    return results.flat(); // Flatten all category sounds into a single array
   } catch (error) {
     console.error('Error loading sounds:', error);
     return [];
