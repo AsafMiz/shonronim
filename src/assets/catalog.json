@@ -11,12 +11,12 @@
   },
   {
     "id": "2",
-    "title": "שון ורון 2",
-    "description": "שון ורון 2",
+    "title": "גמליאל מחפש עבודה",
+    "description": "רוצים לעזור לגמליאל למצוא עבודה? פנו אליו עכשיו",
     "image_url": "images/2.png",
-    "button_title": "2לפרטים נוספים",
-    "link": "https://example.com/course1",
-    "isShown": false
+    "button_title": "לפרטים נוספים",
+    "link": "https://www.youtube.com/shorts/sAZ69bcvl8s",
+    "isShown": true
   },
   {
     "id": "3",

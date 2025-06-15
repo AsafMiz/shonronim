@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Instagram } from 'lucide-react';
@@ -13,32 +12,6 @@ const CreatorPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 p-4" dir="rtl">
       <div className="max-w-2xl mx-auto space-y-8">
         
-        {/* Instagram Profile Section */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <Instagram className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-800"> האינסטגרם של שון ורון</h2>
-              <p className="text-gray-600">@taichovitz</p>
-            </div>
-          </div>
-          
-          <p className="text-gray-700 mb-4">
-            מחפשים את שאלת הסקר? רוצים לשלוח עסקים לפליקס?
-          </p>
-          
-          <Button 
-            onClick={handleInstagramClick}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-          >
-            <Instagram className="w-4 h-4 ml-2" />
-            עברו לעמוד האינסטגרם
-            <ExternalLink className="w-4 h-4 mr-2" />
-          </Button>
-        </div>
-
         {/* Catalog Carousel Section */}
         <CatalogCarousel />
 
@@ -66,6 +39,43 @@ const CreatorPage: React.FC = () => {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Credits Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h3 className="text-xl font-bold text-gray-800 mb-4 text-center" >תודה מיוחדת לביילנדוס</h3>
+          
+          <div className="space-y-3 text-center">
+            <p className="text-gray-700 font-medium" dir="ltr">Guy מיץ קוברות M</p>
+            <p className="text-gray-700 font-medium" dir="ltr">iftachl הבנדיט מאירליש</p>
+            <p className="text-gray-700 font-medium" dir="ltr">Arik חלב אריות Levy</p>
+          </div>
+        </div>
+
+        {/* Instagram Profile Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <Instagram className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-gray-800"> האינסטגרם של שון ורון</h2>
+              <p className="text-gray-600">@taichovitz</p>
+            </div>
+          </div>
+          
+          <p className="text-gray-700 mb-4">
+            מחפשים את שאלת הסקר? רוצים לשלוח עסקים לפליקס?
+          </p>
+          
+          <Button 
+            onClick={handleInstagramClick}
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+          >
+            <Instagram className="w-4 h-4 ml-2" />
+            עברו לעמוד האינסטגרם
+            <ExternalLink className="w-4 h-4 mr-2" />
+          </Button>
         </div>
       </div>
     </div>

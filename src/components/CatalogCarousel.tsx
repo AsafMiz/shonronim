@@ -12,7 +12,7 @@ interface CatalogItem {
   isShown: boolean;
 }
 
-const AUTO_SCROLL_INTERVAL = 10000;
+const AUTO_SCROLL_INTERVAL = 5000;
 
 const CatalogCarousel: React.FC = () => {
   const catalogItems: CatalogItem[] = catalogData.filter(item => item.isShown);
