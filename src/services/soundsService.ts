@@ -29,6 +29,55 @@ const CATEGORY_DIRECTORIES = [
 ];
 
 /**
+ * Dynamically loads all categories from individual category.json files
+ */
+export const loadAllCategories = async (): Promise<Category[]> => {
+  const allCategories: Category[] = [];
+  
+  try {
+    // Load category from each directory
+    for (const categoryDir of CATEGORY_DIRECTORIES) {
+      try {
+        const response = await fetch(`/sounds/${categoryDir}/category.json`);
+        if (response.ok) {
+          const category: Category = await response.json();
+          if (category.isShown) {
+            allCategories.push(category);
+          }
+        } else {
+          console.warn(`Failed to load category: ${categoryDir}`);
+        }
+      } catch (error) {
+        console.error(`Error loading category ${categoryDir}:`, error);
+      }
+    }
+    
+    return allCategories;
+  } catch (error) {
+    console.error('Error loading categories:', error);
+    return [];
+  }
+};
+
+/**
+ * Loads a specific category by directory name
+ */
+export const loadCategory = async (categoryDir: string): Promise<Category | null> => {
+  try {
+    const response = await fetch(`/sounds/${categoryDir}/category.json`);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.warn(`Failed to load category: ${categoryDir}`);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Error loading category ${categoryDir}:`, error);
+    return null;
+  }
+};
+
+/**
  * Dynamically loads all sounds from individual JSON files in each category directory
  */
 export const loadAllSounds = async (): Promise<Sound[]> => {

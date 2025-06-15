@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import categoriesData from '../assets/categories.json';
 import { APP_CONFIG } from '../config/constants';
-import { loadAllSounds } from '../services/soundsService';
+import { loadAllSounds, loadAllCategories } from '../services/soundsService';
 
 interface Sound {
   title: string;
@@ -30,26 +29,29 @@ const Soundboard: React.FC = () => {
   const [showLibrary, setShowLibrary] = useState(false);
   const [targetCubeIndex, setTargetCubeIndex] = useState<number | null>(null);
   const [sounds, setSounds] = useState<Sound[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [, forceUpdate] = useState({});
 
-  const categories: Category[] = categoriesData;
-
-  // Load sounds on component mount
+  // Load sounds and categories on component mount
   useEffect(() => {
-    const loadSounds = async () => {
+    const loadData = async () => {
       setIsLoading(true);
       try {
-        const allSounds = await loadAllSounds();
+        const [allSounds, allCategories] = await Promise.all([
+          loadAllSounds(),
+          loadAllCategories()
+        ]);
         setSounds(allSounds);
+        setCategories(allCategories);
       } catch (error) {
-        console.error('Error loading sounds:', error);
+        console.error('Error loading data:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadSounds();
+    loadData();
   }, []);
 
   // Function to get category color by category ID

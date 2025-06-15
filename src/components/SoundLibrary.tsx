@@ -4,9 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import categoriesData from '../assets/categories.json';
 import { APP_CONFIG } from '../config/constants';
-import { loadAllSounds } from '../services/soundsService';
+import { loadAllSounds, loadAllCategories } from '../services/soundsService';
 
 interface Sound {
   title: string;
@@ -34,29 +33,32 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [playingSound, setPlayingSound] = useState<string | null>(null);
   const [sounds, setSounds] = useState<Sound[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [globalVolume] = useLocalStorage<number>(
     APP_CONFIG.STORAGE_KEYS.GLOBAL_VOLUME, 
     APP_CONFIG.DEFAULT_GLOBAL_VOLUME
   );
 
-  const categories: Category[] = categoriesData;
-
-  // Load sounds on component mount
+  // Load sounds and categories on component mount
   useEffect(() => {
-    const loadSounds = async () => {
+    const loadData = async () => {
       setIsLoading(true);
       try {
-        const allSounds = await loadAllSounds();
+        const [allSounds, allCategories] = await Promise.all([
+          loadAllSounds(),
+          loadAllCategories()
+        ]);
         setSounds(allSounds);
+        setCategories(allCategories);
       } catch (error) {
-        console.error('Error loading sounds:', error);
+        console.error('Error loading data:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadSounds();
+    loadData();
   }, []);
 
   // Function to get category by ID
