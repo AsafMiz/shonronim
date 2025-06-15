@@ -1,23 +1,30 @@
 [
   {
-    "title": "חייבת לקחת ת׳ביילנדוס",
-    "filename": "dorit/ביילנדוס.m4a",
-    "tags": ["עגבות", "מושב"],
-    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
-    "category": "dorit"
+    "title": "אויץ מיט פויץ",
+    "filename": "ilana/oitz.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": [],
+    "category": "ilana"
   },
   {
-    "title": "התשובה הנכונה",
-    "filename": "dorit/answer.mp3",
-    "tags": ["עגבות"],
-    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
-    "category": "dorit"
+    "title": "מה אתה בוכה מה",
+    "filename": "ilana/cry.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": ["מה אתה בוכה מה", "אמרתי לו"],
+    "category": "ilana"
   },
   {
-    "title": "מה נשמע",
-    "filename": "dorit/ma_nishma.mp3",
-    "tags": ["זלמה", "יא חביבתי"],
-    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
-    "category": "dorit"
+    "title": "שי בא בלופ באפ",
+    "filename": "ilana/balup.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": [],
+    "category": "ilana"
+  },
+  {
+    "title": "שיקשוקה בביגט",
+    "filename": "ilana/shakshuka.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": ["שקשוקה בבגט"],
+    "category": "ilana"
   }
 ] 

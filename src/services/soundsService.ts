@@ -25,7 +25,9 @@ const CATEGORY_DIRECTORIES = [
   'gamliel',
   'netali',
   'otot',
-  'jerry'
+  'jerry',
+  'ilana',
+  'razi'
 ];
 
 /**
