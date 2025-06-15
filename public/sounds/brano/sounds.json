@@ -1,0 +1,23 @@
+[
+  {
+    "title": "כחול הנראה",
+    "filename": "brano/ככל_הנראה.m4a",
+    "tags": ["כחול הנראה", "ברהנו"],
+    "hidden_tags": ["ככל הנראה", "ברנו"],
+    "category": "brano"
+  },
+  {
+    "title": "כוס תוך הראש",
+    "filename": "brano/כוס_תוך_הראש.m4a",
+    "tags": ["תוך הראש", "ברהנו"],
+    "hidden_tags": ["לתוך", "ברנו"],
+    "category": "brano"
+  },
+  {
+    "title": "סגול הנראה",
+    "filename": "brano/סגול_הנראה.m4a",
+    "tags": ["כחול הנראה", "ברהנו"],
+    "hidden_tags": ["סגול", "ככל", "ירוק", "ורוד"],
+    "category": "brano"
+  }
+] 

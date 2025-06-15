@@ -1,0 +1,23 @@
+[
+  {
+    "title": "חייבת לקחת ת׳ביילנדוס",
+    "filename": "dorit/ביילנדוס.m4a",
+    "tags": ["עגבות", "מושב"],
+    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
+    "category": "dorit"
+  },
+  {
+    "title": "התשובה הנכונה",
+    "filename": "dorit/answer.mp3",
+    "tags": ["עגבות"],
+    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
+    "category": "dorit"
+  },
+  {
+    "title": "מה נשמע",
+    "filename": "dorit/ma_nishma.mp3",
+    "tags": ["זלמה", "יא חביבתי"],
+    "hidden_tags": ["מושב עגבות", "תותח הפרסים"],
+    "category": "dorit"
+  }
+] 

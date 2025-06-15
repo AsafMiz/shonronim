@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Instagram } from 'lucide-react';
@@ -13,6 +12,46 @@ const CreatorPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 p-4" dir="rtl">
       <div className="max-w-2xl mx-auto space-y-8">
         
+        {/* Catalog Carousel Section */}
+        <CatalogCarousel />
+
+        {/* About the Creator Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h3 className="text-xl font-bold text-gray-800 mb-4">קודם כל לבריאות!</h3>
+          
+          <div className="space-y-4 text-gray-700">
+            <p>
+             כל הקרדיט והתודה האמיתית היא לצוות התוכנית <b>טייכר וזרחוביץ׳</b>!
+            </p>
+            <p>
+              האפליקציה נוצרה ע״י חברי כת השונרונים במטרה לאפשר לקהילה להטריל בכל זמן ובכל מקום.
+            </p>
+            <p>
+              תהנו מהשימוש ואל תשכחו לשתף עם חברים! 😄
+            </p>
+            
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+              <p className="text-blue-800 font-medium">
+                💡 רעיון לשיפור? הצעה לצליל חדש?
+              </p>
+              <p className="text-blue-700 mt-1">
+                פנו אלי דרך הכפתור "תמכו ביוצר"
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Credits Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h3 className="text-xl font-bold text-gray-800 mb-4 text-center" >תודה מיוחדת לביילנדוס</h3>
+          
+          <div className="space-y-3 text-center">
+            <p className="text-gray-700 font-medium" dir="ltr">Guy מיץ קוברות M</p>
+            <p className="text-gray-700 font-medium" dir="ltr">iftachl הבנדיט מאירליש</p>
+            <p className="text-gray-700 font-medium" dir="ltr">Arik חלב אריות Levy</p>
+          </div>
+        </div>
+
         {/* Instagram Profile Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center gap-4 mb-4">
@@ -37,38 +76,6 @@ const CreatorPage: React.FC = () => {
             עברו לעמוד האינסטגרם
             <ExternalLink className="w-4 h-4 mr-2" />
           </Button>
-        </div>
-
-        {/* Catalog Carousel Section */}
-        <CatalogCarousel />
-
-        {/* About the Creator Section */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">קודם כל לבריאות!</h3>
-          
-          <div className="space-y-4 text-gray-700">
-            <p>
-              ברוכים הבאים לאפליקציה של כת השונרונים 🎵
-            </p>
-            <p>
-             כל הקרדיט והתודה האמיתית היא לצוות התוכנית ״טייכר וזרחוביץ׳״!
-            </p>
-            <p>
-              האפליקציה נוצרה ע״י חברי כת השונרונים במטרה לאפשר לקהילה להטריל בכל זמן ובכל מקום.
-            </p>
-            <p>
-              תהנו מהשימוש ואל תשכחו לשתף עם חברים! 😄
-            </p>
-            
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <p className="text-blue-800 font-medium">
-                💡 רעיון לשיפור? הצעה לצליל חדש?
-              </p>
-              <p className="text-blue-700 mt-1">
-                פנו אלי דרך הכפתור "תמכו ביוצר"
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

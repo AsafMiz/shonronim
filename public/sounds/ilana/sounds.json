@@ -1,0 +1,30 @@
+[
+  {
+    "title": "אויץ מיט פויץ",
+    "filename": "ilana/oitz.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": [],
+    "category": "ilana"
+  },
+  {
+    "title": "מה אתה בוכה מה",
+    "filename": "ilana/cry.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": ["מה אתה בוכה מה", "אמרתי לו"],
+    "category": "ilana"
+  },
+  {
+    "title": "שי בא בלופ באפ",
+    "filename": "ilana/balup.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": [],
+    "category": "ilana"
+  },
+  {
+    "title": "שיקשוקה בביגט",
+    "filename": "ilana/shakshuka.mp3",
+    "tags": ["הזמרת", "אילנה"],
+    "hidden_tags": ["שקשוקה בבגט"],
+    "category": "ilana"
+  }
+] 

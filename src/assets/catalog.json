@@ -11,19 +11,19 @@
   },
   {
     "id": "2",
-    "title": "שון ורון 2",
-    "description": "שון ורון 2",
+    "title": "גמליאל מחפש עבודה",
+    "description": "רוצים לעזור לגמליאל למצוא עבודה? פנו אליו עכשיו",
     "image_url": "images/2.png",
-    "button_title": "2לפרטים נוספים",
-    "link": "https://example.com/course1",
-    "isShown": false
+    "button_title": "לפרטים נוספים",
+    "link": "https://www.youtube.com/shorts/sAZ69bcvl8s",
+    "isShown": true
   },
   {
     "id": "3",
-    "title": "המדריך ללחיצת היד של הכת",
-    "description": "צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
+    "title": "3המדריך ללחיצת היד של הכת",
+    "description": "3צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
     "image_url": "images/1.png",
-    "button_title": "לצפייה",
+    "button_title": "3לצפייה",
     "link": "https://www.youtube.com/shorts/Ly0YWCYZqik",
     "isShown": false
   },
@@ -33,7 +33,7 @@
     "description": "שון ורון 4",
     "image_url": "images/4.png",
     "button_title": "4לפרטים נוספים",
-    "link": "https://example.com/course1",
+    "link": "https://example.com/course2",
     "isShown": false
   }
 ]

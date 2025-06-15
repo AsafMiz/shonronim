@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Plus, Play, Trash, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,6 @@ import { APP_CONFIG } from '../config/constants';
 
 
 interface Sound {
-  id: string;
   title: string;
   filename: string;
   tags: string[];

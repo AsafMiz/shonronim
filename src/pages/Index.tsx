@@ -9,7 +9,6 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { APP_CONFIG } from '../config/constants';
 
 interface Sound {
-  id: string;
   title: string;
   filename: string;
   tags: string[];
