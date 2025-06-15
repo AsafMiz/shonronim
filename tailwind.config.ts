@@ -18,9 +18,9 @@ export default {
 		'bg-pink-400',  // used
 		'bg-purple-400',  // used
 		'bg-rose-400',  // used
-		'bg-lime-400',
+		'bg-lime-400', // used
 		'bg-emerald-400',  // used
-		'bg-teal-400',
+		'bg-teal-400',  // used
 		'bg-indigo-400',  // used
 		'bg-fuchsia-400',
 		'bg-violet-400',

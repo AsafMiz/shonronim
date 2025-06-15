@@ -1,0 +1,37 @@
+[
+  {
+    "title": "אהההם",
+    "filename": "razi/ahhmmm.mp3",
+    "tags": ["אטילה", "רזי"],
+    "hidden_tags": ["אטילה שומפלבי"],
+    "category": "razi"
+  },
+  {
+    "title": "אטילה",
+    "filename": "razi/atila.mp3",
+    "tags": ["אטילה", "רזי"],
+    "hidden_tags": ["אטילה שומפלבי"],
+    "category": "razi"
+  },
+  {
+    "title": "אטילילה",
+    "filename": "razi/atilayla.mp3",
+    "tags": ["אטילה", "רזי"],
+    "hidden_tags": ["אטילה שומפלבי"],
+    "category": "razi"
+  },
+  {
+    "title": "איזה אטילה?",
+    "filename": "razi/eize_atila.mp3",
+    "tags": ["אטילה", "רזי"],
+    "hidden_tags": ["אטילה שומפלבי"],
+    "category": "razi"
+  },
+  {
+    "title": "שומפלבי",
+    "filename": "razi/shumpelbi.mp3",
+    "tags": ["אטילה", "רזי"],
+    "hidden_tags": ["אטילה שומפלבי"],
+    "category": "razi"
+  }
+] 
