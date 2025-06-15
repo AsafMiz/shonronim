@@ -1,6 +1,5 @@
 [
   {
-    "id": "1",
     "title": "כחול הנראה",
     "filename": "brano/ככל_הנראה.m4a",
     "tags": ["כחול הנראה", "ברהנו"],
@@ -8,7 +7,6 @@
     "category": "brano"
   },
   {
-    "id": "2",
     "title": "אפשר להשתגע",
     "filename": "peres/אפשר_להשתגע.m4a",
     "tags": ["פרס", "הולוגרמה"],
@@ -16,7 +14,6 @@
     "category": "peres"
   },
   {
-    "id": "3",
     "title": "לוינסון אתה עשר",
     "filename": "berko/אתה_עשר.m4a",
     "tags": ["עשר", "ברקו"],
@@ -24,7 +21,6 @@
     "category": "berko"
   },
   {
-    "id": "4",
     "title": "בהול",
     "filename": "jamil/בהול.m4a",
     "tags": ["למחר", "דחוף"],
@@ -32,7 +28,6 @@
     "category": "jamil"
   },
   {
-    "id": "5",
     "title": "חייבת לקחת ת׳ביילנדוס",
     "filename": "dorit/ביילנדוס.m4a",
     "tags": ["עגבות", "מושב"],
@@ -40,7 +35,6 @@
     "category": "dorit"
   },
   {
-    "id": "6",
     "title": "וידאו",
     "filename": "shon/וידאו.m4a",
     "tags": ["שון"],
@@ -48,7 +42,6 @@
     "category": "shon"
   },
   {
-    "id": "7",
     "title": "חדשנות",
     "filename": "peres/חדשנות.m4a",
     "tags": ["פרס", "הולוגרמה"],
@@ -56,7 +49,6 @@
     "category": "peres"
   },
   {
-    "id": "8",
     "title": "טייפקאסט מרסל מרסו",
     "filename": "jamil/טייפקאסט.m4a",
     "tags": ["למחר", "דחוף"],
@@ -64,7 +56,6 @@
     "category": "jamil"
   },
   {
-    "id": "9",
     "title": "טייכנולוגיה",
     "filename": "peres/טכנולוגיה.m4a",
     "tags": ["פרס", "הולוגרמה"],
@@ -72,7 +63,6 @@
     "category": "peres"
   },
   {
-    "id": "10",
     "title": "כוס תוך הראש",
     "filename": "brano/כוס_תוך_הראש.m4a",
     "tags": ["תוך הראש", "ברהנו"],
@@ -80,7 +70,6 @@
     "category": "brano"
   },
   {
-    "id": "11",
     "title": "מי עשה לוג אוף?",
     "filename": "shon/לוג_אוף.m4a",
     "tags": ["שון"],
@@ -88,7 +77,6 @@
     "category": "shon"
   },
   {
-    "id": "12",
     "title": "ללכת בננות",
     "filename": "peres/ללכת_בננות.m4a",
     "tags": ["פרס", "הולוגרמה"],
@@ -96,7 +84,6 @@
     "category": "peres"
   },
   {
-    "id": "13",
     "title": "מי אומר לי שלום?",
     "filename": "sheftel/מי_אומר_לי_שלום.m4a",
     "tags": ["שפטל"],
@@ -104,7 +91,6 @@
     "category": "sheftel"
   },
   {
-    "id": "14",
     "title": "סגול הנראה",
     "filename": "brano/סגול_הנראה.m4a",
     "tags": ["כחול הנראה", "ברהנו"],
@@ -112,7 +98,6 @@
     "category": "brano"
   },
   {
-    "id": "15",
     "title": "אבללל",
     "filename": "gamliel/אבללל.mp3",
     "tags": ["חיפוש עבודה", "אבל"],
@@ -120,7 +105,6 @@
     "category": "gamliel"
   },
   {
-    "id": "16",
     "title": "אום כולתום",
     "filename": "netali/אום_כולתום.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -128,7 +112,6 @@
     "category": "netali"
   },
   {
-    "id": "17",
     "title": "איש כוחות הביטחון",
     "filename": "netali/איש_כוחות_הביטחון.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -136,7 +119,6 @@
     "category": "netali"
   },
   {
-    "id": "18",
     "title": "מפוצלת",
     "filename": "netali/מפוצלת.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -144,7 +126,6 @@
     "category": "netali"
   },
   {
-    "id": "19",
     "title": "נובח בלי לנשוך",
     "filename": "netali/נובח בלי לנשוך.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -152,7 +133,6 @@
     "category": "netali"
   },
   {
-    "id": "20",
     "title": "עבודה קלין",
     "filename": "netali/עבודה_קלין.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -160,7 +140,6 @@
     "category": "netali"
   },
   {
-    "id": "21",
     "title": "ת׳לא מתבייש?",
     "filename": "netali/לא_מתבייש.mp3",
     "tags": ["השכן", "מהמפוצלת"],
@@ -168,7 +147,6 @@
     "category": "netali"
   },
   {
-    "id": "22",
     "title": "תקשיב",
     "filename": "netali/תקשיב.mp3",
     "tags": ["תקשיב", "תקשיב"],
@@ -176,7 +154,6 @@
     "category": "netali"
   },
   {
-    "id": "23",
     "title": "עשר",
     "filename": "berko/עשר.m4a",
     "tags": ["עשר", "ברקו"],
@@ -184,7 +161,6 @@
     "category": "berko"
   },
   {
-    "id": "24",
     "title": "פותחים פה לשטן",
     "filename": "otot/פה_לשטן.mp3",
     "tags": ["טנצ", "אות"],
@@ -192,7 +168,6 @@
     "category": "otot"
   },
   {
-    "id": "25",
     "title": "טרק ניין",
     "filename": "jerry/track_9.mp3",
     "tags": ["טרק 9", "שאני ביקשתי"],
@@ -200,7 +175,6 @@
     "category": "jerry"
   },
   {
-    "id": "27",
     "title": "אצבעות על הדפקים",
     "filename": "otot/דפקים.mp3",
     "tags": ["טנצ", "אות"],

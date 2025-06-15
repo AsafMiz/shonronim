@@ -10,7 +10,6 @@ import { APP_CONFIG } from '../config/constants';
 
 
 interface Sound {
-  id: string;
   title: string;
   filename: string;
   tags: string[];
@@ -72,7 +71,7 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
   }).sort((a, b) => a.title.localeCompare(b.title, 'he'));
 
   const isSoundOnSoundboard = (soundId: string): boolean => {
-    const result = soundboardSounds.some(boardSound => boardSound?.id === soundId);
+    const result = soundboardSounds.some(boardSound => boardSound?.title === soundId);
     return result;
   };
 
@@ -225,12 +224,12 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
       {/* Sound grid */}
       <div className={`grid ${APP_CONFIG.GRID_CLASSES.LIBRARY} gap-4`}>
         {filteredSounds.map(sound => {
-          const isOnSoundboard = isSoundOnSoundboard(sound.id);
+          const isOnSoundboard = isSoundOnSoundboard(sound.title);
           const availableCubes = hasAvailableCubes();
 
           return (
             <div
-              key={sound.id}
+              key={sound.title}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 border"
             >
               <div className="flex items-center justify-between mb-3">
@@ -242,11 +241,11 @@ const SoundLibrary: React.FC<SoundLibraryProps> = ({ onAddToSoundboard, soundboa
                     size="sm"
                     variant="outline"
                     className="w-8 h-8 p-0"
-                    onClick={() => handlePlay(sound.id, sound.filename)}
+                    onClick={() => handlePlay(sound.title, sound.filename)}
                   >
                     <Play
-                      className={`w-4 h-4 ${playingSound === sound.id ? 'animate-pulse' : ''}`}
-                      fill={playingSound === sound.id ? 'currentColor' : 'none'}
+                      className={`w-4 h-4 ${playingSound === sound.title ? 'animate-pulse' : ''}`}
+                      fill={playingSound === sound.title ? 'currentColor' : 'none'}
                     />
                   </Button>
                   <Button

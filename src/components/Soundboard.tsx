@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SoundCube from './SoundCube';
 import SoundLibrary from './SoundLibrary';
@@ -8,7 +7,6 @@ import categoriesData from '../assets/categories.json';
 import { APP_CONFIG } from '../config/constants';
 
 interface Sound {
-  id: string;
   title: string;
   filename: string;
   tags: string[];
@@ -153,7 +151,7 @@ const Soundboard: React.FC = () => {
         <div className={`grid ${APP_CONFIG.GRID_CLASSES.SOUNDBOARD} gap-2 sm:gap-4 h-full max-w-4xl mx-auto`}>
           {soundboardSounds.map((sound, index) => (
             <SoundCube
-              key={`${index}-${sound?.id || 'empty'}`}
+              key={`${index}-${sound?.title || 'empty'}`}
               sound={sound}
               onAddSound={() => handleAddSound(index)}
               onRemoveSound={() => handleRemoveSound(index)}
