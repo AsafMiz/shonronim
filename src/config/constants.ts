@@ -1,4 +1,3 @@
-
 export const APP_CONFIG = {
   // Soundboard configuration
   SOUNDBOARD_CUBES_COUNT: 6,
@@ -22,7 +21,7 @@ export const APP_CONFIG = {
     // Tab names
     TAB_LIBRARY: 'ספריית צלילים',
     TAB_SOUNDBOARD: 'לוח הצלילים',
-    TAB_CREATOR: 'תותח הפרסים'
+    TAB_CREATOR: 'מושב עגבות'
   },
   
   // Default values
