@@ -22,7 +22,7 @@ export default {
 		'bg-emerald-400',  // used
 		'bg-teal-400',  // used
 		'bg-indigo-400',  // used
-		'bg-fuchsia-400',
+		'bg-fuchsia-400', // used
 		'bg-violet-400',
 		'bg-sky-400',
 		'bg-amber-400',
