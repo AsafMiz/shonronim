@@ -28,7 +28,8 @@ const CATEGORY_DIRECTORIES = [
   'jerry',
   'ilana',
   'razi',
-  'kapitolnik'
+  'kapitolnik',
+  'uri_gavriel'
 ];
 
 /**

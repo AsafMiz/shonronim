@@ -2,8 +2,8 @@
   {
     "title": "אובר אנד אאוט",
     "filename": "kapitolnik/חותם את השידור.mp3",
-    "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
-    "hidden_tags": ["חותם את השידור", "יהורם"],
+    "tags": ["אדמירל", "בריגדיר", "חותם את השידור"],
+    "hidden_tags": ["ראש הצי", "יהורם"],
     "category": "kapitolnik"
   },
   {
@@ -23,6 +23,20 @@
   {
     "title": "צוחק חי חי חי",
     "filename": "kapitolnik/צוחק חי חי חי.mp3",
+    "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
+    "hidden_tags": ["יהורם"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "בצורה נאותה",
+    "filename": "kapitolnik/בצורה נאותה.mp3",
+    "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
+    "hidden_tags": ["יהורם"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "חתיכת פישר",
+    "filename": "kapitolnik/חתיכת פישר.mp3",
     "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
     "hidden_tags": ["יהורם"],
     "category": "kapitolnik"
