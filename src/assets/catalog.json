@@ -4,7 +4,7 @@
     "id": "1",
     "title": "המדריך ללחיצת היד של הכת",
     "description": "צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
-    "image_url": "images/3.png",
+    "image_url": "images/muppets.png",
     "button_title": "לצפייה",
     "link": "https://www.youtube.com/shorts/Ly0YWCYZqik",
     "isShown": true
@@ -13,27 +13,27 @@
     "id": "2",
     "title": "גמליאל מחפש עבודה",
     "description": "רוצים לעזור לגמליאל למצוא עבודה? פנו אליו עכשיו",
-    "image_url": "images/2.png",
+    "image_url": "images/simpsons.png",
     "button_title": "לפרטים נוספים",
     "link": "https://www.youtube.com/shorts/sAZ69bcvl8s",
     "isShown": true
   },
   {
     "id": "3",
-    "title": "3המדריך ללחיצת היד של הכת",
-    "description": "3צפו בשון ורון מסבירים על לחיצת היד הרשמית של הכת",
-    "image_url": "images/1.png",
-    "button_title": "3לצפייה",
-    "link": "https://www.youtube.com/shorts/Ly0YWCYZqik",
-    "isShown": false
+    "title": "איך נוכל לעזור למי שנקלע למצוקה רגשית?",
+    "description": "הפסיכולוגית רונה גז מסבירה איך להתמודד עם האזעקות",
+    "image_url": "images/lego.png",
+    "button_title": "להאזנה",
+    "link": "https://www.youtube.com/watch?v=-8jTezMqLHQ&ab_channel=AsiT",
+    "isShown": true
   },
   {
     "id": "4",
-    "title": "שון ורון 4",
-    "description": "שון ורון 4",
-    "image_url": "images/4.png",
-    "button_title": "4לפרטים נוספים",
-    "link": "https://example.com/course2",
-    "isShown": false
+    "title": "זה הזמן לשנות קונספציה",
+    "description": "הפסיכולוגית רונה גז עם טיפים להתמודדות עם המצב",
+    "image_url": "images/disney.png",
+    "button_title": "להאזנה",
+    "link": "https://www.youtube.com/watch?v=3SH5HTo_SNE&ab_channel=AsiT",
+    "isShown": true
   }
 ]
