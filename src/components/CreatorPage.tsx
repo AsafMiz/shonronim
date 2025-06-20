@@ -3,17 +3,47 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink, Instagram } from 'lucide-react';
 import CatalogCarousel from './CatalogCarousel';
 
+// Telegram SVG icon (since Lucide doesn't have one by default)
+const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="none" {...props}>
+    <circle cx="12" cy="12" r="12" fill="#229ED9" />
+    <path d="M17.924 7.618c.13-.53-.2-.77-.68-.6l-11.1 4.28c-.53.21-.52.5-.09.63l2.85.89 1.09 3.36c.14.39.26.54.53.54.27 0 .38-.13.52-.39l1.3-2.12 2.7 1.99c.5.28.86.13.99-.46l1.8-8.12zm-7.1 5.1l5.44-3.42c.26-.16.5-.07.3.1l-4.66 4.2-.18 2.02-.9-2.9z" fill="#fff" />
+  </svg>
+);
+
 const CreatorPage: React.FC = () => {
   const handleInstagramClick = () => {
     window.open('https://www.instagram.com/taichovitz/?hl=he', '_blank');
+  };
+  const handleTelegramClick = () => {
+    window.open('https://t.me/ShonRonBot', '_blank');
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4" dir="rtl">
       <div className="max-w-2xl mx-auto space-y-8">
-        
         {/* Catalog Carousel Section */}
         <CatalogCarousel />
+
+        {/* Telegram Banner Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+            <TelegramIcon className="w-8 h-8 text-white" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-gray-800">הבוט של שון ורון בטלגרם</h2>
+            <p className="text-gray-600">ShonRonBot by NX1X@</p>
+            <p className="text-gray-700 mt-2 text-sm">הצטרפו לבוט בטלגרם וקבלו גישה מהירה לדמויות, חידות, עדכונים, ועוד!</p>
+            <Button 
+              onClick={handleTelegramClick}
+              className="w-full mt-3 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white"
+            >
+              <TelegramIcon className="w-4 h-4 ml-2" />
+              עברו לבוט בטלגרם
+              <ExternalLink className="w-4 h-4 mr-2" />
+            </Button>
+          </div>
+        </div>
 
         {/* About the Creator Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
@@ -49,6 +79,7 @@ const CreatorPage: React.FC = () => {
             <p className="text-gray-700 font-medium" dir="ltr">Guy מיץ קוברות M</p>
             <p className="text-gray-700 font-medium" dir="ltr">iftachl הבנדיט מאירליש</p>
             <p className="text-gray-700 font-medium" dir="ltr">Arik חלב אריות Levy</p>
+            <p className="text-gray-700 font-medium" dir="ltr">Eden טוסטר משולושים Portnoy</p>
           </div>
         </div>
 

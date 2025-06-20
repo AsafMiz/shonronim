@@ -8,7 +8,7 @@
   },
   {
     "title": "פשיטדת הסיפורים",
-    "filename": "kapitolnik/סיפורים וטמטומים.mp3",
+    "filename": "kapitolnik/פשטידת הסיפורים.mp3",
     "tags": ["ראש הצי", "תנור הטימטומים"],
     "hidden_tags": ["יהורם"],
     "category": "kapitolnik"
@@ -39,6 +39,41 @@
     "filename": "kapitolnik/חתיכת פישר.mp3",
     "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
     "hidden_tags": ["יהורם"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "אל תיהיה ראש טומטום",
+    "filename": "kapitolnik/אל תיהיה ראש טומטום.mp3",
+    "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
+    "hidden_tags": ["יהורם"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "ארגזים של רמטומים",
+    "filename": "kapitolnik/ארגזים של רמטומים.mp3",
+    "tags": ["אדמירל", "בריגדיר", "ראש הצי"],
+    "hidden_tags": ["יהורם"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "בן אדם של מגרש",
+    "filename": "kapitolnik/ארחי פרחי בן אדם של מגרש.mp3",
+    "tags": ["ראש הצי", "ארחי פרחי"],
+    "hidden_tags": ["יהורם", "אדמירל", "בריגדיר"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "בלי סיפורים",
+    "filename": "kapitolnik/בלי סיפורים ובלי טמטומים.mp3",
+    "tags": ["ראש הצי", "ובלי טמטומים"],
+    "hidden_tags": ["יהורם", "אדמירל", "בריגדיר"],
+    "category": "kapitolnik"
+  },
+  {
+    "title": "בלי רימטומים",
+    "filename": "kapitolnik/בלי רימטומים.mp3",
+    "tags": ["ראש הצי"],
+    "hidden_tags": ["יהורם", "אדמירל", "בריגדיר"],
     "category": "kapitolnik"
   }
 ] 
