@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Instagram } from 'lucide-react';
+import { ExternalLink, Instagram, Palette, Globe } from 'lucide-react';
 import CatalogCarousel from './CatalogCarousel';
 
 // Telegram SVG icon (since Lucide doesn't have one by default)
@@ -17,6 +17,9 @@ const CreatorPage: React.FC = () => {
   };
   const handleTelegramClick = () => {
     window.open('https://t.me/ShonRonBot', '_blank');
+  };
+  const handleSketchesClick = () => {
+    window.open('https://shon-ron.lovable.app/', '_blank');
   };
 
   return (
@@ -40,6 +43,26 @@ const CreatorPage: React.FC = () => {
             >
               <TelegramIcon className="w-4 h-4 ml-2" />
               עברו לבוט בטלגרם
+              <ExternalLink className="w-4 h-4 mr-2" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Sketches Website Banner Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full flex items-center justify-center">
+            <Globe className="w-8 h-8 text-white" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-gray-800">מערכונים לפי דמויות</h2>
+            <p className="text-gray-600">shon-ron.lovable.app</p>
+            <p className="text-gray-700 mt-2 text-sm">מחפשים מערכון לפי דמויות של שון ורון?</p>
+            <Button 
+              onClick={handleSketchesClick}
+              className="w-full mt-3 bg-gradient-to-r from-orange-400 to-yellow-400 hover:from-orange-500 hover:to-yellow-500 text-white"
+            >
+              <Globe className="w-4 h-4 ml-2" />
+              עברו לאתר
               <ExternalLink className="w-4 h-4 mr-2" />
             </Button>
           </div>
@@ -79,7 +102,8 @@ const CreatorPage: React.FC = () => {
             <p className="text-gray-700 font-medium" dir="ltr">Guy מיץ קוברות M</p>
             <p className="text-gray-700 font-medium" dir="ltr">iftachl הבנדיט מאירליש</p>
             <p className="text-gray-700 font-medium" dir="ltr">Arik חלב אריות Levy</p>
-            <p className="text-gray-700 font-medium" dir="ltr">Eden טוסטר משולושים Portnoy</p>
+            <p className="text-gray-700 font-medium" dir="ltr">Eden השומפלבי הטוב Portnoy</p>
+            <p className="text-gray-700 font-medium" dir="ltr">Lior ההוא מהחבובות Shinekop</p>
           </div>
         </div>
 
